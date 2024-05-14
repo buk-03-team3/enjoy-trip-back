@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,10 +23,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/travel")
 @CrossOrigin("*")
+@Tag(name = "05. 관광지 상세 검색 컨트롤러 페이지", description = "관광지 검색 관련 api")
 public class TravelController {
 	private final TravelService travelService;
 	
 	@GetMapping("/content")
+	@Operation(summary = "시,도,구,군 + 컨텐츠 관광지 검색", description = "사용자가 선택한 시, 도, 구, 군과 컨텐츠에 따른 관광지를 조회하는 기능입니다.")
 	public ResponseEntity<Map<String,Object>> travelListByContent(
 			@RequestParam("sidoCode") int sidoCode,
 			@RequestParam("gugunCode") int gugunCode,
@@ -43,6 +47,7 @@ public class TravelController {
 	}
 	
 	@GetMapping("list")
+	@Operation(summary = "시,도,구,군 관광지 검색", description = "사용자가 선택한 시, 도, 구, 군에 따른 관광지를 조회하는 기능입니다.")
 	public ResponseEntity<Map<String,Object>> travelList(
 			@RequestParam("sidoCode") int sidoCode,
 			@RequestParam("gugunCode") int gugunCode
@@ -60,6 +65,7 @@ public class TravelController {
 	}
 	
 	@GetMapping("/keyword")
+	@Operation(summary = "관광지 지역명 검색 기능", description = "사용자가 입력한 관광지를 조회하는 기능입니다.")
 	public ResponseEntity<Map<String,Object>> travelListByKeyword(
 			@RequestParam("keyword") String keyword
 			){

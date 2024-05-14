@@ -54,7 +54,8 @@ public class UserTests {
 	@DisplayName("detail Dao Test")
 	@Transactional
 	void testUserDetail() {
-		assertNotNull(userDao.userDetail(1));
+		assertNotNull(userDao.userDetail(4));
+		System.out.println(userDao.userDetail(4).getUserName());
 	}
 	
 	@Test
