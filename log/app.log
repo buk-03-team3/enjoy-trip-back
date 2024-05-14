@@ -1015,3 +1015,47 @@ java.lang.IllegalStateException: ApplicationContext failure threshold (1) exceed
 2024-05-14T16:18:07.648+09:00  INFO 10324 --- [EnjoyTrip] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 2024-05-14T16:18:07.704+09:00  INFO 10324 --- [EnjoyTrip] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-05-14T16:18:07.712+09:00  INFO 10324 --- [EnjoyTrip] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-05-14T16:54:54.909+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Starting EnjoyTripApplication using Java 17.0.9 with PID 5416 (C:\Users\SSAFY\Desktop\enjoy-trip-back\out\production\classes started by SSAFY in C:\Users\SSAFY\Desktop\enjoy-trip-back)
+2024-05-14T16:54:54.911+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-14T16:54:54.943+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-05-14T16:54:54.944+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-05-14T16:54:55.822+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-14T16:54:55.830+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-14T16:54:55.830+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-05-14T16:54:55.863+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-14T16:54:55.863+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 919 ms
+2024-05-14T16:54:56.637+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-05-14T16:54:56.661+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-14T16:54:56.668+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Started EnjoyTripApplication in 2.097 seconds (process running for 2.711)
+2024-05-14T16:54:58.959+09:00  INFO 5416 --- [EnjoyTrip] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-14T16:54:58.960+09:00  INFO 5416 --- [EnjoyTrip] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-14T16:54:58.960+09:00  INFO 5416 --- [EnjoyTrip] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-05-14T16:54:59.261+09:00  INFO 5416 --- [EnjoyTrip] [http-nio-8080-exec-2] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 198 ms
+2024-05-14T16:55:09.267+09:00  INFO 5416 --- [EnjoyTrip] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-05-14T16:55:09.330+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Starting EnjoyTripApplication using Java 17.0.9 with PID 5416 (C:\Users\SSAFY\Desktop\enjoy-trip-back\out\production\classes started by SSAFY in C:\Users\SSAFY\Desktop\enjoy-trip-back)
+2024-05-14T16:55:09.331+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-14T16:55:09.561+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-14T16:55:09.561+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-14T16:55:09.561+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-05-14T16:55:09.574+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-14T16:55:09.574+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 242 ms
+2024-05-14T16:55:09.855+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-05-14T16:55:09.864+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-14T16:55:09.867+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Started EnjoyTripApplication in 0.556 seconds (process running for 15.91)
+2024-05-14T16:55:09.868+09:00  INFO 5416 --- [EnjoyTrip] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-05-14T16:55:16.072+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Starting EnjoyTripApplication using Java 17.0.9 with PID 15228 (C:\Users\SSAFY\Desktop\enjoy-trip-back\out\production\classes started by SSAFY in C:\Users\SSAFY\Desktop\enjoy-trip-back)
+2024-05-14T16:55:16.074+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-14T16:55:16.108+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-05-14T16:55:16.109+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-05-14T16:55:16.981+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-14T16:55:16.989+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-14T16:55:16.990+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-05-14T16:55:17.036+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-14T16:55:17.036+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 927 ms
+2024-05-14T16:55:17.868+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-05-14T16:55:17.895+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-14T16:55:17.909+09:00  INFO 15228 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Started EnjoyTripApplication in 2.129 seconds (process running for 2.557)
+2024-05-14T16:55:18.065+09:00  INFO 15228 --- [EnjoyTrip] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-14T16:55:18.066+09:00  INFO 15228 --- [EnjoyTrip] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-14T16:55:18.067+09:00  INFO 15228 --- [EnjoyTrip] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-05-14T16:55:18.450+09:00  INFO 15228 --- [EnjoyTrip] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 236 ms
