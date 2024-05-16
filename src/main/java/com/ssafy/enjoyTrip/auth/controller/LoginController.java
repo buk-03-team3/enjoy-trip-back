@@ -53,9 +53,6 @@ public class LoginController {
 	@Operation(summary = "로그아웃", description = "User 로그아웃 기능입니다.")
 	public ResponseEntity<Map<String, Object>> logout(HttpSession session){
 		session.invalidate();
-		if(session.getAttribute(SessionConst.LOGIN_MEMBER) != null){
-			return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 		return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
 	}
 }
