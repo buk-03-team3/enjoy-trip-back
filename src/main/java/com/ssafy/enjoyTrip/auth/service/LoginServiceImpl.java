@@ -23,8 +23,10 @@ public class LoginServiceImpl implements LoginService{
 
 		if( userDto != null && userDto.getPassword().equals(password)) {
             userDto.setPassword(null);
+			log.info("userDto={}", userDto);
             return userDto;
         }
-		return userDto;
+		log.info("userDto={}", userDto);
+		return null;
 	}
 }

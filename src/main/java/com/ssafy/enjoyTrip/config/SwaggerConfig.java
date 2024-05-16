@@ -16,4 +16,5 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(info);
     }
+
 }
