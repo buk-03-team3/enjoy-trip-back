@@ -10,6 +10,6 @@ import com.ssafy.enjoyTrip.travel.dto.TravelDto;
 @Mapper
 public interface TravelDao {
 	public List<TravelDto> selectTravelList(@Param("sidoCode") int sidoCode, @Param("gugunCode") int gugunCode);
-	public List<TravelDto> selectTravelListWithContent(@Param("sidoCode") int sidoCode,@Param("gugunCode") int gugunCode,@Param("contentType") int contentType);
+	public List<TravelDto> selectTravelListWithContent(@Param("sidoCode") int sidoCode,@Param("gugunCode") int gugunCode,@Param("contentType") List contentType);
 	public List<TravelDto> selectTravleListWithKeyword(String keyword);
 }

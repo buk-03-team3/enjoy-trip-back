@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.enjoyTrip.recommand.dao.RecommandDao">
+
+    <select id="recommandWithAddr" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
+    select * from attraction_info where (sido_code, gugun_code) = (select sido, gugun from user where uuid = #{uuid}); 
+    </select>
+    
+    <select id="recommandPopular" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
+    select sido_code, count(*) from favorites join attraction_info on fk_content_id = content_id where user_id = #{uuid} group by sido_code limit 10; 
+    </select>
+    
+    <select id="recommandByType" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
+    select content_type_id, count(*) from favorites join attraction_info on fk_content_id = content_id where user_id = #{uuid} group by content_type_id limit 10;
+    </select>
+
+</mapper>

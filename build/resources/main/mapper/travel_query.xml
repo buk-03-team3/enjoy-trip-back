@@ -13,7 +13,10 @@
 		parameterType="map">
 		select content_id , title, addr1, addr2, first_image, first_image2, 
 		latitude, longitude 
-		from attraction_info where sido_code=#{sidoCode} and gugun_code=#{gugunCode} and content_type_id = #{contentType}		
+		from attraction_info where sido_code=#{sidoCode} and gugun_code=#{gugunCode} and content_type_id in
+			<foreach item="content" collection="contentType" open="(" separator="," close=")">
+				#{content}
+			</foreach>
 		</select>
 		
 		<select id="selectTravleListWithKeyword" 
@@ -21,7 +24,7 @@
 		parameterType="string">
 		select content_id , title, addr1, addr2, first_image, first_image2, 
 		latitude, longitude 
-		from attraction_info where addr1 like concat('%',#{keyword},'%') ;
+		from attraction_info where addr1 like concat('%',#{keyword},'%') or title like concat('%',#{keyword},'%');
 		</select>
 </mapper>
 

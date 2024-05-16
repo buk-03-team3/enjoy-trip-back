@@ -5,6 +5,6 @@ import com.ssafy.enjoyTrip.travel.dto.TravelDto;
 
 public interface TravelService {
 	public List<TravelDto> selectTravelList(int sidoCode, int gugunCode);
-	public List<TravelDto> selectTravelListWithContent(int sidoCode, int gugunCode, int contentType);
+	public List<TravelDto> selectTravelListWithContent(int sidoCode, int gugunCode, String contentType);
 	public List<TravelDto> selectTravleListWithKeyword(String keyword);
 }

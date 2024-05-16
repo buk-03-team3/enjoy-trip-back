@@ -1,5 +1,6 @@
 package com.ssafy.enjoyTrip.travel.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,9 +22,10 @@ public class TravelServiceImpl implements TravelService {
 	}
 
 	@Override
-	public List<TravelDto> selectTravelListWithContent(int sidoCode, int gugunCode, int contentType) {
+	public List<TravelDto> selectTravelListWithContent(int sidoCode, int gugunCode, String contentType) {
 		// TODO Auto-generated method stub
-		return travelDao.selectTravelListWithContent(sidoCode, gugunCode, contentType);
+		String[] splitContentType =contentType.split("/");
+		return travelDao.selectTravelListWithContent(sidoCode, gugunCode, Arrays.stream(splitContentType).toList());
 	}
 
 	@Override

@@ -14,7 +14,8 @@ import java.io.IOException;
 public class LoginCheckFilter implements Filter {
     private static final String[] whiteList = {"/", "/users", "/auth/login", "/auth/logout", "/error",
             "/css/*", "/ico.*", "/ping",
-            "/swagger-ui.html", "/swagger-ui/*" ,"/swagger/*", "/v3/*"};
+            "/swagger-ui.html", "/swagger-ui/*" ,"/swagger/*", "/v3/*",
+            "/trip/*", "/travel/*"};
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;

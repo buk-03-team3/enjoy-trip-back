@@ -43,9 +43,9 @@ public class UserTests {
 	@Transactional
 	void testRegister() {
 		UserDto userDto = new UserDto();
-		userDto.setUserEmail("ssafy1@ssafy.com");
-		userDto.setUserName("김싸피");
-		userDto.setUserPassword("ssafy");
+		userDto.setEmail("ssafy1@ssafy.com");
+		userDto.setName("김싸피");
+		userDto.setPassword("ssafy");
 		assertEquals(1,userDao.userRegister(userDto));
 	}
 	
@@ -55,7 +55,7 @@ public class UserTests {
 	@Transactional
 	void testUserDetail() {
 		assertNotNull(userDao.userDetail(4));
-		System.out.println(userDao.userDetail(4).getUserName());
+		System.out.println(userDao.userDetail(4).getName());
 	}
 	
 	@Test
@@ -73,9 +73,9 @@ public class UserTests {
 	void testUserUpdate() {
 		UserDto userDto = new UserDto();
 		userDto.setUuid(1);
-		userDto.setUserEmail("ssafy@ssafy.com");
-		userDto.setUserName("김싸피");
-		userDto.setUserPassword("ssafy1231");
+		userDto.setEmail("ssafy@ssafy.com");
+		userDto.setName("김싸피");
+		userDto.setPassword("ssafy1231");
 		assertEquals(1,userDao.userUpdate(userDto));
 	}
 	
@@ -85,9 +85,9 @@ public class UserTests {
 	@Transactional
 	void testRegisterService() {
 		UserDto userDto = new UserDto();
-		userDto.setUserEmail("ssafy1@ssafy.com");
-		userDto.setUserName("김싸피");
-		userDto.setUserPassword("ssafy");
+		userDto.setEmail("ssafy1@ssafy.com");
+		userDto.setName("김싸피");
+		userDto.setPassword("ssafy");
 		assertEquals(1,userService.userRegister(userDto));
 	}
 	
@@ -114,9 +114,9 @@ public class UserTests {
 	void testUserUpdateService() {
 		UserDto userDto = new UserDto();
 		userDto.setUuid(1);
-		userDto.setUserEmail("ssafy@ssafy.com");
-		userDto.setUserName("김싸피");
-		userDto.setUserPassword("ssafy1231");
+		userDto.setEmail("ssafy@ssafy.com");
+		userDto.setName("김싸피");
+		userDto.setPassword("ssafy1231");
 		assertEquals(1,userService.userUpdate(userDto));
 	}
 }

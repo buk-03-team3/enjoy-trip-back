@@ -3,6 +3,7 @@ package com.ssafy.enjoyTrip.travel;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -45,8 +46,10 @@ public class TestTravel {
 	void testTravelDaoSelectListWithContent() {
 		int sidoCode= 1;
 		int gugunCode =1;
-		int contentType=12;
-		List<TravelDto> list=travelDao.selectTravelListWithContent(sidoCode, gugunCode, contentType);
+		String contentType= "12/38";
+		String[] split = contentType.split("/");
+		List<TravelDto> list=travelDao.selectTravelListWithContent(sidoCode, gugunCode, Arrays.stream(split).toList());
+		System.out.println(list.size());
 		assertNotEquals(list.size(),0);
 	}
 	

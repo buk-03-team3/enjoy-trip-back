@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/travel")
-@CrossOrigin("*")
 @Tag(name = "05. 관광지 상세 검색 컨트롤러 페이지", description = "관광지 검색 관련 api")
 public class TravelController {
 	private final TravelService travelService;
@@ -32,7 +30,7 @@ public class TravelController {
 	public ResponseEntity<Map<String,Object>> travelListByContent(
 			@RequestParam("sidoCode") int sidoCode,
 			@RequestParam("gugunCode") int gugunCode,
-			@RequestParam("contentType") int contentType
+			@RequestParam("contentType") String contentType
 			){
 		List<TravelDto> list =travelService.selectTravelListWithContent(sidoCode, gugunCode, contentType);
 		Map<String, Object> map = new HashMap<>();
