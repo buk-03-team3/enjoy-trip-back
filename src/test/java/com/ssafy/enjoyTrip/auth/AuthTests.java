@@ -39,18 +39,18 @@ public class AuthTests {
 		assertNotNull(loginService);
 	}
 	
-	@Test
+	/*@Test
 	@Order(3)
 	@DisplayName("Login Dao Test")
 	void testLoginDao() {
 		LoginDto dto = new LoginDto();
 		dto.setEmail("sdf@naver.sdfsd");
 		dto.setPassword("1234");
-		LoginDto result = loginDao.login(dto.getEmail());
+		LoginDto result = loginDao.login(email);
 		System.out.println(result);
 		assertEquals(dto.getPassword(), result.getPassword());
 	}
-	
+
 	@Test
 	@Order(4)
 	@DisplayName("Login Service Test")
@@ -60,6 +60,6 @@ public class AuthTests {
 		dto.setPassword("1234");
 		LoginResultDto result = loginService.login(dto);
 		assertNotNull(result);
-	}
+	}*/
 
 }

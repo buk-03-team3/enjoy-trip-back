@@ -5,5 +5,5 @@ import com.ssafy.enjoyTrip.auth.dto.LoginResultDto;
 import com.ssafy.enjoyTrip.user.dto.UserDto;
 
 public interface LoginService {
-	LoginResultDto login(LoginDto dto);
+	UserDto login(String email, String password);
 }

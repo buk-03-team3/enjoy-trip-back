@@ -1,5 +1,7 @@
 package com.ssafy.enjoyTrip.auth.service;
 
+import com.ssafy.enjoyTrip.user.dto.UserDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.enjoyTrip.auth.dao.LoginDao;
@@ -9,34 +11,20 @@ import com.ssafy.enjoyTrip.auth.dto.LoginResultDto;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService{
 	
 	private final LoginDao loginDao;
 	
 	@Override
-	public LoginResultDto login(LoginDto dto) {
-		LoginDto userDto = loginDao.login(dto.getEmail());
-		LoginResultDto lrdto = new LoginResultDto();
-        
-		if( userDto != null && userDto.getPassword().equals(dto.getPassword())) {
-            // password null setting
+	public UserDto login(String email, String password) {
+		UserDto userDto = loginDao.login(email);
+
+		if( userDto != null && userDto.getPassword().equals(password)) {
             userDto.setPassword(null);
-        	lrdto.setLoginDto(userDto);
-        	lrdto.setMessage("정상 로그인");
-        	lrdto.setResult("success");
-            return lrdto;
-        }else if(userDto==null) {
-        	lrdto.setMessage("잘못된 아이디 또는 존재하지 않는 아이디");
-        	lrdto.setResult("fail");
-        	return lrdto;
-        }else if(userDto!=null && !dto.getPassword().equals(userDto.getPassword())){
-        	lrdto.setMessage("잘못된 비밀번호");
-        	lrdto.setResult("fail");
-        	return lrdto;
+            return userDto;
         }
-		lrdto.setMessage("알 수 없는 에러");
-		lrdto.setResult("fail");
-		return lrdto;
+		return userDto;
 	}
 }

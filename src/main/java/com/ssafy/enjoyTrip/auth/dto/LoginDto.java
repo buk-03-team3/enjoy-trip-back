@@ -1,5 +1,6 @@
 package com.ssafy.enjoyTrip.auth.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class LoginDto {
-	private int uuid;
-    private String name;
+    @NotNull
     private String password;
+
+    @NotNull
     private String email;
-    private String userProfileImageUrl;
-    private int sido;
-    private int gugun;
 }

@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService{
 	private final Pattern pattern = Pattern.compile(passwordRegex);
 	@Override
 	public int userRegister(UserDto userDto) {
-		String userPassword = userDto.getUserPassword();
+		String userPassword = userDto.getPassword();
 		Matcher matcher = pattern.matcher(userPassword);
         if (matcher.matches()) {
             System.out.println("비밀번호가 규칙에 맞습니다.");
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDto userDetail(int userId) {
 		log.info("userId={}",userId);
-		log.info(userDao.userDetail(4).getUserName());
+		log.info(userDao.userDetail(4).getName());
 		return userDao.userDetail(userId);
 	}
 

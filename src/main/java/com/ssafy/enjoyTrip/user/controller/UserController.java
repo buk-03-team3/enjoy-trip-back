@@ -46,13 +46,13 @@ public class UserController {
 	}
 	
 	@PutMapping("/users/{uuid}")
-	@Operation(summary = "User 정보 수정", description = "User의 정브를 수정하는 기능입니다.")
+	@Operation(summary = "User 정보 수정", description = "User의 정보를 수정하는 기능입니다.")
 	public int userUpdate(@PathVariable("uuid") int uuid, UserDto dto) {
 		return userService.userUpdate(dto);
 	}
 	
 	@DeleteMapping("/users/{uuid}")
-	@Operation(summary = "User 정보 삭제", description = "User의 정브를 삭제하는 기능입니다.")
+	@Operation(summary = "User 정보 삭제", description = "User의 정보를 삭제하는 기능입니다.")
 	public int userDelete(@PathVariable("uuid") int uuid) {
 		return userService.userDelete(uuid);
 	}
