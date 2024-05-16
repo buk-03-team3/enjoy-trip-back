@@ -2999,3 +2999,39 @@ Consider defining a bean of type 'com.ssafy.enjoyTrip.auth.service.LoginService'
 2024-05-16T15:52:11.398+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
 2024-05-16T15:52:11.401+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Started EnjoyTripApplication in 0.57 seconds (process running for 34.243)
 2024-05-16T15:52:11.402+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-05-16T15:56:19.120+09:00  INFO 8240 --- [EnjoyTrip] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-05-16T15:56:19.174+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Starting EnjoyTripApplication using Java 17.0.9 with PID 8240 (C:\Users\SSAFY\Desktop\enjoy-trip-back\out\production\classes started by SSAFY in C:\Users\SSAFY\Desktop\enjoy-trip-back)
+2024-05-16T15:56:19.174+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-16T15:56:19.382+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-16T15:56:19.383+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-16T15:56:19.383+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-05-16T15:56:19.392+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-16T15:56:19.392+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 216 ms
+2024-05-16T15:56:19.669+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-05-16T15:56:19.676+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-16T15:56:19.680+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Started EnjoyTripApplication in 0.521 seconds (process running for 282.521)
+2024-05-16T15:56:19.680+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-05-16T15:57:30.786+09:00  INFO 8240 --- [EnjoyTrip] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2024-05-16T15:57:30.847+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Starting EnjoyTripApplication using Java 17.0.9 with PID 8240 (C:\Users\SSAFY\Desktop\enjoy-trip-back\out\production\classes started by SSAFY in C:\Users\SSAFY\Desktop\enjoy-trip-back)
+2024-05-16T15:57:30.848+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-16T15:57:31.079+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-16T15:57:31.080+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-16T15:57:31.080+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-05-16T15:57:31.089+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-16T15:57:31.090+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 240 ms
+2024-05-16T15:57:31.372+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-05-16T15:57:31.382+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-16T15:57:31.386+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Started EnjoyTripApplication in 0.557 seconds (process running for 354.228)
+2024-05-16T15:57:31.387+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-05-16T15:57:32.814+09:00  INFO 8240 --- [EnjoyTrip] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2024-05-16T15:57:32.867+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Starting EnjoyTripApplication using Java 17.0.9 with PID 8240 (C:\Users\SSAFY\Desktop\enjoy-trip-back\out\production\classes started by SSAFY in C:\Users\SSAFY\Desktop\enjoy-trip-back)
+2024-05-16T15:57:32.867+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-05-16T15:57:33.075+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-16T15:57:33.075+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-16T15:57:33.075+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-05-16T15:57:33.084+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-16T15:57:33.084+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 216 ms
+2024-05-16T15:57:33.372+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-05-16T15:57:33.379+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-16T15:57:33.383+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] c.ssafy.enjoyTrip.EnjoyTripApplication   : Started EnjoyTripApplication in 0.532 seconds (process running for 356.225)
+2024-05-16T15:57:33.384+09:00  INFO 8240 --- [EnjoyTrip] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
