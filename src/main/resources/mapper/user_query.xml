@@ -4,21 +4,24 @@
 <mapper namespace="com.ssafy.enjoyTrip.user.dao.UserDao">
 
     <select id="userDetail" parameterType="int" resultType="com.ssafy.enjoyTrip.user.dto.UserDto">
-        select uuid, email, password, name, user_profile_image_url
-        from user
-        where uuid=#{userId}
+        select uuid, email, password, name, user_profile_image_url, sido, gugun
+          from user
+         where uuid=#{userId}
     </select>
     
     <insert id="userRegister" parameterType="com.ssafy.enjoyTrip.user.dto.UserDto" >
-        insert into user (email, password, name) values (#{userEmail}, #{userPassword},#{userName});
+        insert into user (email, password, name, user_profile_image_url, sido, gugun)
+             values (#{userEmail}, #{userPassword},#{userName}, #{sido}, #{gugun});
     </insert>
     
     <update id="userUpdate" parameterType="com.ssafy.enjoyTrip.user.dto.UserDto">
     	update user
-    	set name=#{userName}
-			,password=#{userPassword}
-			,user_profile_image_url=#{userProfileImageUrl}
-		where uuid=#{uuid}
+    	   set name=#{userName},
+    	       password=#{userPassword},
+    	       user_profile_image_url=#{userProfileImageUrl},
+    	       sido=#{sido},
+    	       gugun=#{gugun}
+		 where uuid=#{uuid}
     </update>
     
     <delete id="userDelete" parameterType="com.ssafy.enjoyTrip.user.dto.UserDto">
