@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class TravelDto {
-	private int contentId;
+	private int attractionId;
 	private String title;
 	private String addr1;
 	private String addr2;

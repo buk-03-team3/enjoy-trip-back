@@ -135,7 +135,7 @@ public class BoardController {
 		//postman에서는 session 존재하지 않기 때문에 error 발생함. dummy data로 test 권장
 		UserDto userDto = (UserDto) session.getAttribute("userDto");
 		
-		BoardDto boardDto = boardService.boardDetail(boardId, userDto.getUuid());
+		BoardDto boardDto = boardService.boardDetail(boardId, userDto.getUserId());
 		
 		map.put("boardDto",boardDto);
 		map.put("result", "success");

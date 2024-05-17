@@ -16,10 +16,10 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	private final UserService userService;
 	
-	@GetMapping("/users/{uuid}")
+	@GetMapping("/users/{userId}")
 	@Operation(summary = "User 정보 조회", description = "User의 정보를 조회하는 기능입니다.")
-	public UserDto userDetail(@PathVariable("uuid") int uuid) {
-		UserDto dto = userService.userDetail(uuid);
+	public UserDto userDetail(@PathVariable("userId") int userId) {
+		UserDto dto = userService.userDetail(userId);
 		return dto;
 	}
 	
@@ -41,15 +41,15 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping("/users/{uuid}")
+	@PutMapping("/users/{userId}")
 	@Operation(summary = "User 정보 수정", description = "User의 정보를 수정하는 기능입니다.")
-	public int userUpdate(@PathVariable("uuid") int uuid, UserDto dto) {
+	public int userUpdate(@PathVariable("userId") int userId, UserDto dto) {
 		return userService.userUpdate(dto);
 	}
 	
-	@DeleteMapping("/users/{uuid}")
+	@DeleteMapping("/users/{userId}")
 	@Operation(summary = "User 정보 삭제", description = "User의 정보를 삭제하는 기능입니다.")
-	public int userDelete(@PathVariable("uuid") int uuid) {
-		return userService.userDelete(uuid);
+	public int userDelete(@PathVariable("userId") int userId) {
+		return userService.userDelete(userId);
 	}
 }

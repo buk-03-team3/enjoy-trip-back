@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class RecommandDto {
 	
-	private int contentId;
+	private int attractionId;
 	private int contentTypeId;
 	private String title;
 	private String addr1;

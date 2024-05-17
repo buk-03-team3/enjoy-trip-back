@@ -16,17 +16,17 @@ public class RecommandServiceImpl implements RecommandService{
 	private final RecommandDao recommandDao;
 	
 	@Override
-	public List<RecommandDto> recommandWithAddr(int uuid) {
-		return recommandDao.recommandWithAddr(uuid);
+	public List<RecommandDto> recommandWithAddr(int userId) {
+		return recommandDao.recommandWithAddr(userId);
 	}
 
 	@Override
-	public List<RecommandDto> recommandPopular(int uuid) {
-		return recommandDao.recommandPopular(uuid);
+	public List<RecommandDto> recommandPopular(int userId) {
+		return recommandDao.recommandPopular(userId);
 	}
 
 	@Override
-	public List<RecommandDto> recommandByType(int uuid) {
-		return recommandDao.recommandByType(uuid);
+	public List<RecommandDto> recommandByType(int userId) {
+		return recommandDao.recommandByType(userId);
 	}
 }

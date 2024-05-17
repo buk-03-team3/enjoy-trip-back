@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class MeetingDto {
 	int meetingId;
-	int writer;
+	int userId;
 	String title;
 	String content;
 	String meetingPassword;

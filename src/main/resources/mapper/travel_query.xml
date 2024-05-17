@@ -3,7 +3,7 @@
 <mapper namespace="com.ssafy.enjoyTrip.travel.dao.TravelDao">
 		<select id="selectTravelList"
 		resultType="com.ssafy.enjoyTrip.travel.dto.TravelDto" parameterType="map" >
-		select content_id , title, addr1, addr2, 
+		select attraction_id, title, addr1, addr2,
 		first_image, first_image2, latitude, longitude 
 		from attraction_info where sido_code= #{sidoCode} and gugun_code= #{gugunCode}
 		</select> 
@@ -11,7 +11,7 @@
 		<select id="selectTravelListWithContent" 
 		resultType="com.ssafy.enjoyTrip.travel.dto.TravelDto"
 		parameterType="map">
-		select content_id , title, addr1, addr2, first_image, first_image2, 
+		select attraction_id , title, addr1, addr2, first_image, first_image2,
 		latitude, longitude 
 		from attraction_info where sido_code=#{sidoCode} and gugun_code=#{gugunCode} and content_type_id in
 			<foreach item="content" collection="contentType" open="(" separator="," close=")">
@@ -22,7 +22,7 @@
 		<select id="selectTravleListWithKeyword" 
 		resultType="com.ssafy.enjoyTrip.travel.dto.TravelDto"
 		parameterType="string">
-		select content_id , title, addr1, addr2, first_image, first_image2, 
+		select attraction_id , title, addr1, addr2, first_image, first_image2,
 		latitude, longitude 
 		from attraction_info where addr1 like concat('%',#{keyword},'%') or title like concat('%',#{keyword},'%');
 		</select>

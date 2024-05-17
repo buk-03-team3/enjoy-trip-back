@@ -26,11 +26,11 @@ public class RecommandController {
 
 	private final RecommandService recommandService;
 	
-	@GetMapping("/{uuid}")
+	@GetMapping("/{userId}")
 	@Operation(summary = "사용자 기반 여행지 추천", description = "사용자 기반에 따른 여행지를 추천하는 기능입니다.")
-	public ResponseEntity<Map<String,Object>> recommandWihtAddr(@PathVariable int uuid){
+	public ResponseEntity<Map<String,Object>> recommandWihtAddr(@PathVariable int userId){
 		Map<String,Object> map = new HashMap<>();
-		List<RecommandDto> recommandList= recommandService.recommandWithAddr(uuid);;
+		List<RecommandDto> recommandList= recommandService.recommandWithAddr(userId);
 		
 		if (recommandList != null) {
 			map.put("result", "success");
@@ -42,11 +42,11 @@ public class RecommandController {
 		}
 	}
 	
-	@GetMapping("/region/{uuid}")
+	@GetMapping("/region/{userId}")
 	@Operation(summary = "사용자 지역 기반 여행지 추천", description = "사용자가 입력한 지역 기반에 따른 여행지를 추천하는 기능입니다.")
-	public ResponseEntity<Map<String,Object>> recommandPopular(@PathVariable int uuid){
+	public ResponseEntity<Map<String,Object>> recommandPopular(@PathVariable int userId){
 		Map<String,Object> map = new HashMap<>();
-		List<RecommandDto> recommandList = recommandService.recommandPopular(uuid);
+		List<RecommandDto> recommandList = recommandService.recommandPopular(userId);
 		
 		if (recommandList != null) {
 			map.put("result", "success");
@@ -58,11 +58,11 @@ public class RecommandController {
 		}
 	}
 	
-	@GetMapping("/type/{uuid}")
+	@GetMapping("/type/{userId}")
 	@Operation(summary = "사용자 콘텐츠 기반 여행지 추천", description = "사용자가 선호하는 콘텐츠 기반에 따른 여행지를 추천하는 기능입니다.")
-	public ResponseEntity<Map<String,Object>> recommandType(@PathVariable int uuid){
+	public ResponseEntity<Map<String,Object>> recommandType(@PathVariable int userId){
 		Map<String,Object> map = new HashMap<>();
-		List<RecommandDto> recommandDto = recommandService.recommandByType(uuid);
+		List<RecommandDto> recommandDto = recommandService.recommandByType(userId);
 		
 		if (recommandDto != null) {
 			map.put("result", "success");

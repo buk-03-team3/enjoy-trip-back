@@ -10,7 +10,7 @@ public interface BoardService {
 	int boardDelete(int boardId);
 	List<BoardDto> boardList(int limit, int offset);
 	int boardListTotalCnt();
-	BoardDto boardDetail(int boardId, int userSeq);
+	BoardDto boardDetail(int boardId, int userId);
 	List<BoardDto> boardListSearchWord(int limit, int offset, String searchWord);
 	int boardListSearchWordTotalCnt(String searchWord);
 	List<BoardDto> boardListTop(int limit);

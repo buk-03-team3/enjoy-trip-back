@@ -8,7 +8,7 @@ import com.ssafy.enjoyTrip.recommand.dto.RecommandDto;
 
 @Mapper
 public interface RecommandDao {
-	List<RecommandDto> recommandWithAddr(int uuid);
-	List<RecommandDto> recommandPopular(int uuid);
-	List<RecommandDto> recommandByType(int uuid);
+	List<RecommandDto> recommandWithAddr(int userId);
+	List<RecommandDto> recommandPopular(int userId);
+	List<RecommandDto> recommandByType(int userId);
 }

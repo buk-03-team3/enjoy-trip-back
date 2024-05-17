@@ -34,9 +34,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardDto boardDetail(int boardId, int userSeq) { // 현재 세션 사용자의 userSeq
+    public BoardDto boardDetail(int boardId, int userId) { // 현재 세션 사용자의 userId
         BoardDto boardDto = boardDao.boardDetail(boardId);
-        if (boardDto.getUserSeq() == userSeq) {
+        if (boardDto.getUserId() == userId) {
             boardDto.setSameUser(true);
         } else {
             boardDto.setSameUser(false);

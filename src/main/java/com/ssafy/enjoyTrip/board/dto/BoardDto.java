@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class BoardDto {
     private int boardId;
-    private int userSeq;
+    private int userId;
     private String userName;
     private String userProfileImageUrl;
     private String title;

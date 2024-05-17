@@ -13,6 +13,8 @@
 		<mapper resource="mapper/travel_query.xml" />
 		<mapper resource="mapper/sidogugun_query.xml" />
 		<mapper resource="mapper/meeting_query.xml" />
+		<mapper resource="mapper/favorite_query.xml"/>
+		<mapper resource="mapper/recommand_query.xml"/>
 		
 	</mappers>
 </configuration>
