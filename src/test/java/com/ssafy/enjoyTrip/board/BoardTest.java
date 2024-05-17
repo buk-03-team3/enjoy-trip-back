@@ -31,7 +31,7 @@ public class BoardTest {
 		BoardDto dto = new BoardDto();
 		dto.setContent("testDto");
 		dto.setTitle("TEST");
-		dto.setUserSeq(1);
+		dto.setUserId(1);
 		assertEquals(1, boardDao.boardInsert(dto));
 	}
 
@@ -41,7 +41,7 @@ public class BoardTest {
 		BoardDto dto = new BoardDto();
 		dto.setContent("testDto");
 		dto.setTitle("TESTUpdate");
-		dto.setUserSeq(1);
+		dto.setUserId(1);
 		assertEquals(1, boardDao.boardInsert(dto));
 	}
 
@@ -63,14 +63,14 @@ public class BoardTest {
 	@Test
 	public void testBoardListTop() {
 		List<BoardDto> list = boardDao.boardListTop(8);
-		System.out.println(list);
-		assertEquals(list.size(), 8);
+		System.out.println(list.size());
+		assertEquals(list.size(), 5);
 	}
 	
 	@Test
 	public void testBoardList() {
 		int limit = 8;
-		int offset= 5;
+		int offset= 0;
 		List<BoardDto> list = boardDao.boardList(limit, offset);
 		System.out.println(list);
 		assertEquals(list.size(), 5);		

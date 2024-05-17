@@ -32,7 +32,7 @@ public class MeetingTest {
 		dto.setMeetingEndDate(LocalDateTime.now());
 		dto.setMeetingStartDate(LocalDateTime.now());
 		dto.setTitle("Asdf");
-		dto.setWriter(4);
+		dto.setUserId(4);
 		dto.setMeetingPassword("adfsf1213s");
 		int result =dao.meetingInsert(dto);
 		assertEquals(1, result);

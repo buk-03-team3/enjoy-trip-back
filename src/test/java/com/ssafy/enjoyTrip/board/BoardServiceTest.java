@@ -31,7 +31,7 @@ public class BoardServiceTest {
 		BoardDto dto = new BoardDto();
 		dto.setContent("testDto22");
 		dto.setTitle("TEST22");
-		dto.setUserSeq(1);
+		dto.setUserId(1);
 		System.out.println(boardService.boardInsert(dto));
 		assertEquals(1, boardService.boardInsert(dto));
 	}
@@ -42,7 +42,7 @@ public class BoardServiceTest {
 		BoardDto dto = new BoardDto();
 		dto.setContent("testDto");
 		dto.setTitle("TESTUpdate");
-		dto.setUserSeq(1);
+		dto.setUserId(1);
 		assertEquals(1, boardService.boardInsert(dto));
 	}
 
@@ -56,8 +56,8 @@ public class BoardServiceTest {
 	@Test
 	public void testBoardDetail() {
 		int boardId = 24;
-		int userSeq= 5;
-		BoardDto dto = boardService.boardDetail(boardId, userSeq);
+		int userId= 5;
+		BoardDto dto = boardService.boardDetail(boardId, userId);
 		System.out.println(dto);
 		assertNotNull(dto);
 	}

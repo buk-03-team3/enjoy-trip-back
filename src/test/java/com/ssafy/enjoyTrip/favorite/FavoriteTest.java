@@ -52,7 +52,7 @@ public class FavoriteTest {
 	void testAddDao() {
 		FavoriteDto favoriteDto = new FavoriteDto();
 		favoriteDto.setUserId(4);
-		favoriteDto.setContentId(125413);
+		favoriteDto.setAttractionId(125413);
 		assertEquals(1,favoriteDao.favoriteAdd(favoriteDto));
 	}
 	
@@ -61,8 +61,7 @@ public class FavoriteTest {
 	@Transactional
 	@DisplayName("favorite delete Dao Test")
 	void testDeleteDao() {
-		int favoriteId = 1;
-		
+		int favoriteId =22;
 		assertEquals(1, favoriteDao.favoriteDelete(favoriteId));
 	}
 	
@@ -81,7 +80,7 @@ public class FavoriteTest {
 	void testAddService() {
 		FavoriteDto favoriteDto = new FavoriteDto();
 		favoriteDto.setUserId(4);
-		favoriteDto.setContentId(125413);
+		favoriteDto.setAttractionId(125413);
 		assertEquals(1,favoriteService.favoriteAdd(favoriteDto));
 	}
 	
@@ -90,8 +89,7 @@ public class FavoriteTest {
 	@Transactional
 	@DisplayName("favorite delete Service Test")
 	void testDeleteService() {
-		int favoriteId = 1;
-		
+		int favoriteId = 22;
 		assertEquals(1, favoriteService.favoriteDelete(favoriteId));
 	}
 

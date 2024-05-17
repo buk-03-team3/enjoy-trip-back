@@ -72,7 +72,7 @@ public class UserTests {
 	@Transactional
 	void testUserUpdate() {
 		UserDto userDto = new UserDto();
-		userDto.setUuid(1);
+		userDto.setUserId(4);
 		userDto.setEmail("ssafy@ssafy.com");
 		userDto.setName("김싸피");
 		userDto.setPassword("ssafy1231");
@@ -113,7 +113,7 @@ public class UserTests {
 	@Transactional
 	void testUserUpdateService() {
 		UserDto userDto = new UserDto();
-		userDto.setUuid(1);
+		userDto.setUserId(4);
 		userDto.setEmail("ssafy@ssafy.com");
 		userDto.setName("김싸피");
 		userDto.setPassword("ssafy1231");
