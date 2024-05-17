@@ -17,7 +17,12 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService{
 	
 	private final UserDao userDao;
-	private final String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{8,16}$";
+
+	// 최소 8자 이상, 최대 16자 이하여야 합니다.
+	// 최소 하나의 영문자 (대소문자 모두 허용) 또는 숫자가 포함되어야 합니다.
+	// 최소 하나의 특수문자가 포함되어야 합니다.
+	private final String passwordRegex = "^(?=.*[a-zA-Z\\d])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,16}$";
+
 	private final Pattern pattern = Pattern.compile(passwordRegex);
 	@Override
 	public int userRegister(UserDto userDto) {
