@@ -4,15 +4,24 @@
 <mapper namespace="com.ssafy.enjoyTrip.recommand.dao.RecommandDao">
 
     <select id="recommandWithAddr" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
-    select * from attraction_info where (sido_code, gugun_code) = (select sido, gugun from user where user_id = #{userId});
+        SELECT *
+        FROM attraction_info
+        WHERE addr1 LIKE (SELECT CONCAT('%', sido, '%') FROM user WHERE user_id = #{userId})
+          AND addr1 LIKE (SELECT CONCAT('%', gugun, '%') FROM user WHERE user_id = #{userId});
     </select>
     
     <select id="recommandPopular" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
-    select sido_code, count(*) from favorites join attraction_info on favorites.attraction_id = attraction_info.attraction_id where user_id = #{userId} group by sido_code limit 10;
+    select sido_code, gugun_code, count(*) from favorites join attraction_info on favorites.attraction_id = attraction_info.attraction_id where user_id = #{userId} group by sido_code limit 10;
+    </select>
+
+    <select id="recommandManyFavorite" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
+        select sido_code, gugun_code, count(*) from favorites join attraction_info on favorites.attraction_id = attraction_info.attraction_id;
     </select>
     
-    <select id="recommandByType" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
-    select content_type_id, count(*) from favorites join attraction_info on  favorites.attraction_id = attraction_info.attraction_id  where user_id = #{userId} group by content_type_id limit 10;
+    <select id="favoriteByType" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
+        select content_type_id, count(*) from favorites join attraction_info on  favorites.attraction_id = attraction_info.attraction_id  where user_id = #{userId} group by content_type_id limit 10;
     </select>
+
+
 
 </mapper>
