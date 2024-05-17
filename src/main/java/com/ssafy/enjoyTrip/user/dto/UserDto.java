@@ -17,6 +17,6 @@ public class UserDto {
     private String password;
     private String email;
     private String userProfileImageUrl;
-    private int sido;
-    private int gugun;
+    private String sido;
+    private String gugun;
 }
