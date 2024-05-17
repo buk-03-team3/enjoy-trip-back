@@ -22,7 +22,7 @@ public class RecommandServiceImpl implements RecommandService{
 
 	@Override
 	public List<RecommandDto> recommandPopular(int userId) {
-		return recommandDao.recommandPopular(userId);
+		return recommandDao.recommandPopular();
 	}
 
 	@Override

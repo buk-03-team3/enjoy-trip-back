@@ -3,21 +3,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.enjoyTrip.meeting.dao.MeetingDao">
 <insert id="meetingInsert" parameterType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto"> 
-	 insert into meeting (writer, title, content, meeting_password, attraction_id, meeting_start_date, meeting_end_date ) values (#{writer},#{title},#{content},#{meetingPassword},
+	 insert into meeting (user_id, title, content, meeting_password, attraction_id, meeting_start_date, meeting_end_date ) values (#{userId},#{title},#{content},#{meetingPassword},
 	 #{attractionId},#{meetingStartDate},#{meetingEndDate});
 </insert>
 
 <select id="meetingSelect" parameterType="int" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
 	select * from meeting where meeting_id = #{meetingId};
 </select>
-<!--     <select id="login" parameterType="string" resultType="com.ssafy.enjoyTrip.auth.dto.LoginDto">
-        select *
-        from user
-        where email=#{userEmail}
-    </select>
-    
-     <insert id="userRegister" parameterType="com.ssafy.enjoyTrip.user.dto.UserDto" >
-        insert into user (email, password, name) values (#{userEmail}, #{userPassword},#{userName});
-    </insert>
- -->
+
 </mapper>

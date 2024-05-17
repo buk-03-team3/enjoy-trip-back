@@ -4,15 +4,39 @@
 <mapper namespace="com.ssafy.enjoyTrip.recommand.dao.RecommandDao">
 
     <select id="recommandWithAddr" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
-    select * from attraction_info where (sido_code, gugun_code) = (select sido, gugun from user where uuid = #{uuid}); 
+        SELECT *
+        FROM attraction_info
+        WHERE addr1 LIKE (SELECT CONCAT('%', sido, '%') FROM user WHERE user_id = #{userId})
+          AND addr1 LIKE (SELECT CONCAT('%', gugun, '%') FROM user WHERE user_id = #{userId});
     </select>
-    
-    <select id="recommandPopular" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
-    select sido_code, count(*) from favorites join attraction_info on fk_content_id = content_id where user_id = #{uuid} group by sido_code limit 10; 
+
+    <select id = "recommendFavoriteAddr" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
+        select  ai.*  from favorites f join attraction_info ai
+        on ai.attraction_id = f.attraction_id
+        where f.user_id = #{userId}
+        group by f.attraction_id
+        order by  count(*) desc;
+
     </select>
+
+    <select id="recommandPopular" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
+        SELECT COUNT(*) as favoriteCount , ai.attraction_id, ai.content_type_id, ai.title,
+               ai.addr1, ai.first_image, ai.first_image2, sido_code, gugun_code, latitude, longitude
+        FROM favorites f join attraction_info ai on ai.attraction_id=f.attraction_id
+        GROUP BY f.attraction_id
+        ORDER BY favoriteCount DESC;
+    </select>
+
     
     <select id="recommandByType" parameterType="int" resultType="com.ssafy.enjoyTrip.recommand.dto.RecommandDto">
-    select content_type_id, count(*) from favorites join attraction_info on fk_content_id = content_id where user_id = #{uuid} group by content_type_id limit 10;
+        select  * from attraction_info where content_type_id in
+            (select distinct content_type_id
+             from attraction_info ai join favorites f on ai.attraction_id =f.attraction_id
+             where user_id= #{userId})
+        order by rand() limit 10;
+
     </select>
+
+
 
 </mapper>

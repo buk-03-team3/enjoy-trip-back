@@ -10,7 +10,7 @@
     </select>
     
     <insert id="favoriteAdd" parameterType="com.ssafy.enjoyTrip.favorite.dto.FavoriteDto" >
-        insert into favorites values (null, #{userId}, #{contentId});
+        insert into favorites(user_id,attraction_id) values ( #{userId}, #{attractionId});
     </insert>
     
     <delete id="favoriteDelete" parameterType="com.ssafy.enjoyTrip.favorite.dto.FavoriteDto">

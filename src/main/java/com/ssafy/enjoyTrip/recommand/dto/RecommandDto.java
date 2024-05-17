@@ -22,7 +22,8 @@ public class RecommandDto {
 	private String tel;
 	private String first_image;
 	private String first_image2;
-	private int readcount;
+	private int readCount;
+	private int favoriteCount;
 	private int gugunCode;
 	private int sidoCode;
 	private double latitude;
