@@ -7,7 +7,7 @@
         SELECT *
         FROM attraction_info
         WHERE addr1 LIKE (SELECT CONCAT('%', sido, '%') FROM user WHERE user_id = #{userId})
-          AND addr1 LIKE (SELECT CONCAT('%', gugun, '%') FROM user WHERE user_id = #{userId});
+          AND addr1 LIKE (SELECT CONCAT('%', gugun, '%') FROM user WHERE user_id = #{userId}) order by rand() limit 10;
     </select>
 
     <select id = "recommendFavoriteAddr" parameterType="int" resultType="com.ssafy.enjoyTrip.recommend.dto.RecommendDto">

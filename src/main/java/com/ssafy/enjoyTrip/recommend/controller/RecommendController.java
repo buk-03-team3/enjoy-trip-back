@@ -28,7 +28,7 @@ public class RecommendController {
 	
 	@GetMapping("/{userId}")
 	@Operation(summary = "사용자 기반 여행지 추천", description = "사용자 기반에 따른 여행지를 추천하는 기능입니다.")
-	public ResponseEntity<Map<String,Object>> recommendWihtAddr(@PathVariable int userId){
+	public ResponseEntity<Map<String,Object>> recommendWithAddr(@PathVariable int userId){
 		Map<String,Object> map = new HashMap<>();
 		List<RecommendDto> recommendList= recommendService.recommendWithAddr(userId);
 		
