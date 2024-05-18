@@ -8,13 +8,13 @@
 
 	<mappers>
 		<mapper resource="mapper/board_query.xml" /> 
-		<mapper resource="mapper/login_query.xml" /> 
+		<mapper resource="mapper/login_query.xml" />
 		<mapper resource="mapper/user_query.xml" />
 		<mapper resource="mapper/travel_query.xml" />
 		<mapper resource="mapper/sidogugun_query.xml" />
 		<mapper resource="mapper/meeting_query.xml" />
 		<mapper resource="mapper/favorite_query.xml"/>
-		<mapper resource="mapper/recommand_query.xml"/>
+		<mapper resource="mapper/recommend_query.xml"/>
 		
 	</mappers>
 </configuration>

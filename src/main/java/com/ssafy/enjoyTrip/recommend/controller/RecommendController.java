@@ -1,5 +1,6 @@
-package com.ssafy.enjoyTrip.recommand.controller;
+package com.ssafy.enjoyTrip.recommend.controller;
 
+import com.ssafy.enjoyTrip.recommend.dto.RecommendDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,28 +14,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.enjoyTrip.recommand.dto.RecommandDto;
-import com.ssafy.enjoyTrip.recommand.service.RecommandService;
+import com.ssafy.enjoyTrip.recommend.service.RecommendService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/recommand")
+@RequestMapping("/recommend")
 @Tag(name = "06. 추천 관련 컨트롤러 페이지", description = "추천 관련 api")
-public class RecommandController {
+public class RecommendController {
 
-	private final RecommandService recommandService;
+	private final RecommendService recommendService;
 	
 	@GetMapping("/{userId}")
 	@Operation(summary = "사용자 기반 여행지 추천", description = "사용자 기반에 따른 여행지를 추천하는 기능입니다.")
-	public ResponseEntity<Map<String,Object>> recommandWihtAddr(@PathVariable int userId){
+	public ResponseEntity<Map<String,Object>> recommendWihtAddr(@PathVariable int userId){
 		Map<String,Object> map = new HashMap<>();
-		List<RecommandDto> recommandList= recommandService.recommandWithAddr(userId);
+		List<RecommendDto> recommendList= recommendService.recommendWithAddr(userId);
 		
-		if (recommandList != null) {
+		if (recommendList != null) {
 			map.put("result", "success");
-			map.put("list", recommandList);
+			map.put("list", recommendList);
 			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		} else {
 			map.put("result", "fail");
@@ -44,13 +44,13 @@ public class RecommandController {
 	
 	@GetMapping("/region/{userId}")
 	@Operation(summary = "사용자 지역 기반 여행지 추천", description = "사용자가 입력한 지역 기반에 따른 여행지를 추천하는 기능입니다.")
-	public ResponseEntity<Map<String,Object>> recommandPopular(@PathVariable int userId){
+	public ResponseEntity<Map<String,Object>> recommendPopular(@PathVariable int userId){
 		Map<String,Object> map = new HashMap<>();
-		List<RecommandDto> recommandList = recommandService.recommandPopular(userId);
+		List<RecommendDto> recommendList = recommendService.recommendPopular(userId);
 		
-		if (recommandList != null) {
+		if (recommendList != null) {
 			map.put("result", "success");
-			map.put("list", recommandList);
+			map.put("list", recommendList);
 			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		} else {
 			map.put("result", "fail");
@@ -60,13 +60,13 @@ public class RecommandController {
 	
 	@GetMapping("/type/{userId}")
 	@Operation(summary = "사용자 콘텐츠 기반 여행지 추천", description = "사용자가 선호하는 콘텐츠 기반에 따른 여행지를 추천하는 기능입니다.")
-	public ResponseEntity<Map<String,Object>> recommandType(@PathVariable int userId){
+	public ResponseEntity<Map<String,Object>> recommendType(@PathVariable int userId){
 		Map<String,Object> map = new HashMap<>();
-		List<RecommandDto> recommandDto = recommandService.recommandByType(userId);
+		List<RecommendDto> recommendDto = recommendService.recommendByType(userId);
 		
-		if (recommandDto != null) {
+		if (recommendDto != null) {
 			map.put("result", "success");
-			map.put("recommandDto", recommandDto);
+			map.put("recommendDto", recommendDto);
 			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 		} else {
 			map.put("result", "fail");

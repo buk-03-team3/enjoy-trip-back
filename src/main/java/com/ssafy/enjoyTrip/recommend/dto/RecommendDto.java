@@ -1,4 +1,4 @@
-package com.ssafy.enjoyTrip.recommand.dto;
+package com.ssafy.enjoyTrip.recommend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class RecommandDto {
+public class RecommendDto {
 	
 	private int attractionId;
 	private int contentTypeId;
