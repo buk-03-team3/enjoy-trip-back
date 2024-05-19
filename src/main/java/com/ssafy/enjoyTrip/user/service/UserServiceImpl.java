@@ -50,8 +50,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserDto userDetail(int userId) {
-		log.info("userId={}",userId);
-		log.info(userDao.userDetail(4).getName());
 		return userDao.userDetail(userId);
 	}
 

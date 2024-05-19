@@ -51,8 +51,17 @@ public class UserController {
 	
 	@PutMapping("/{userId}")
 	@Operation(summary = "User 정보 수정", description = "User의 정보를 수정하는 기능입니다.")
-	public int userUpdate(@PathVariable("userId") int userId, UserDto dto) {
-		return userService.userUpdate(dto);
+	public ResponseEntity<Map<String, Object>> userUpdate(@PathVariable("userId") int userId, UserDto dto) {
+		UserDto user = userService.userDetail(userId);
+		user.setName(dto.getName());
+		user.setSido(dto.getSido());
+		user.setGugun(dto.getGugun());
+
+		int result = userService.userUpdate(user);
+		if(result == 1){
+			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@DeleteMapping("/{userId}")
