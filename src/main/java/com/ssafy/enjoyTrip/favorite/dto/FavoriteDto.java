@@ -11,4 +11,5 @@ public class FavoriteDto {
 	private int favoritesId;
 	private int userId;	
 	private int attractionId;
+	private String attractionName;
 }
