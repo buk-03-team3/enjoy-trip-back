@@ -51,7 +51,7 @@ public class UserController {
 	
 	@PutMapping("/{userId}")
 	@Operation(summary = "User 정보 수정", description = "User의 정보를 수정하는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> userUpdate(@PathVariable("userId") int userId, UserDto dto) {
+	public ResponseEntity<Map<String, Object>> userUpdate(@PathVariable("userId") int userId, @RequestBody UserDto dto) {
 		UserDto user = userService.userDetail(userId);
 		user.setName(dto.getName());
 		user.setSido(dto.getSido());
@@ -75,13 +75,12 @@ public class UserController {
 	public ResponseEntity<Map<String, Object>> userProfileImagePathUpdate(
 			@PathVariable("userId") int userId,
 			@RequestPart("profileImage") MultipartFile file) throws IOException {
-		log.info("fileName: {}", file.getOriginalFilename());
 		String ret = userService.updateUserProfileImage(userId, file);
 		Map<String, Object> result = new HashMap<>();
 
-		if(!"".equals(ret)){
+		if(!"default".equals(ret)){
 			result.put("result", "success");
-			result.put("updateImageUrl", file.getOriginalFilename());
+			result.put("updateImageUrl", ret);
 
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		} else {
