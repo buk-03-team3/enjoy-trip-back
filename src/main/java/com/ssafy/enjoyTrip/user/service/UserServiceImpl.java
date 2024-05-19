@@ -1,21 +1,32 @@
 package com.ssafy.enjoyTrip.user.service;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.enjoyTrip.user.dao.UserDao;
 import com.ssafy.enjoyTrip.user.dto.UserDto;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService{
-	
+	private final AmazonS3 amazonS3;
+
+	@Value("${cloud.aws.s3.bucket}")
+	private String bucket;
+
 	private final UserDao userDao;
 
 	// 최소 8자 이상, 최대 16자 이하여야 합니다.
@@ -54,4 +65,40 @@ public class UserServiceImpl implements UserService{
 		return userDao.userDelete(userId);
 	}
 
+
+	/**
+	 * putObject() 메소드가 파일을 저장해주는 메소드
+	 * getURl()을 통해 파일이 저장된 URL을 return 해주고, 이 URL로 이동 시 해당 파일이 오픈됨 (버킷 정책 변경을 하지 않았으면 파일은 업로드 되지만 해당 URL로 이동 시 accessDenied 됨)
+	 * 만약 MultipartFile에 대해 잘 모르거나 웹 페이지에서 form으로 파일을 입력받고 싶다면 [Spring Boot] 파일 업로드 참고
+	 * */
+	@Override
+	public String updateUserProfileImage(int userId, MultipartFile multipartFile) throws IOException {
+		String originalFilename = multipartFile.getOriginalFilename();
+
+		ObjectMetadata metadata = new ObjectMetadata();
+		metadata.setContentLength(multipartFile.getSize());
+		metadata.setContentType(multipartFile.getContentType());
+
+		try {
+			// S3에 파일 업로드
+			amazonS3.putObject(bucket, originalFilename, multipartFile.getInputStream(), metadata);
+		} catch (Exception e) {
+			// 업로드 실패 시 예외를 던져 이후 로직이 실행되지 않도록 함
+			throw new IOException("Failed to upload file to S3", e);
+		}
+
+		String userProfileImageUrl = amazonS3.getUrl(bucket, originalFilename).toString();
+
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("userId", userId);
+		paramMap.put("userProfileImageUrl", userProfileImageUrl);
+
+		int ret = userDao.updateUserProfileImage(paramMap);
+
+		if(ret == 1) {
+			return userProfileImageUrl;
+		} else {
+			return null;
+		}
+	}
 }

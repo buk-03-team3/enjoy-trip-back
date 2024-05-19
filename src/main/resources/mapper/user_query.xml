@@ -10,8 +10,8 @@
     </select>
     
     <insert id="userRegister" parameterType="com.ssafy.enjoyTrip.user.dto.UserDto" >
-        insert into user (email, password, name, user_profile_image_url, sido, gugun)
-             values (#{email}, #{password},#{name}, null ,#{sido}, #{gugun});
+        insert into user (email, password, name, sido, gugun)
+             values (#{email}, #{password},#{name}, #{sido}, #{gugun});
     </insert>
     
     <update id="userUpdate" parameterType="com.ssafy.enjoyTrip.user.dto.UserDto">
@@ -27,5 +27,13 @@
     <delete id="userDelete" parameterType="com.ssafy.enjoyTrip.user.dto.UserDto">
     	delete from user where user_id=#{userId}
     </delete>
+
+    <update id="updateUserProfileImage" parameterType="java.util.Map">
+        update user
+        set user_profile_image_url=#{userProfileImageUrl}
+        where user_id=#{userId}
+    </update>
+
+
 
 </mapper>

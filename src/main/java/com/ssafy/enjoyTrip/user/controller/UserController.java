@@ -11,7 +11,10 @@ import com.ssafy.enjoyTrip.user.dto.UserDto;
 import com.ssafy.enjoyTrip.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -57,4 +60,25 @@ public class UserController {
 	public int userDelete(@PathVariable("userId") int userId) {
 		return userService.userDelete(userId);
 	}
+
+	@PutMapping(value = "/user-img-update/{userId}", consumes = { "multipart/form-data"})
+	@Operation(summary = "사용자 프로필 이미지 변경", description = "사용자의 프로필 이미지를 변경하는 기능입니다.")
+	public ResponseEntity<Map<String, Object>> userProfileImagePathUpdate(
+			@PathVariable("userId") int userId,
+			@RequestPart("profileImage") MultipartFile file) throws IOException {
+		log.info("fileName: {}", file.getOriginalFilename());
+		String ret = userService.updateUserProfileImage(userId, file);
+		Map<String, Object> result = new HashMap<>();
+
+		if(!"".equals(ret)){
+			result.put("result", "success");
+			result.put("updateImageUrl", file.getOriginalFilename());
+
+			return new ResponseEntity<>(result, HttpStatus.OK);
+		} else {
+			result.put("result", "fail");
+		}
+		return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

@@ -20,15 +20,15 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/css/**", "/*.icon", "/error", "/swagger-ui/**");
     }
 
-    @Bean
-    public FilterRegistrationBean loginCheckFilter(){
-        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(new LoginCheckFilter());
-        filterRegistrationBean.setOrder(1);
-        filterRegistrationBean.addUrlPatterns("/*");
-
-        return filterRegistrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean loginCheckFilter(){
+//        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+//        filterRegistrationBean.setFilter(new LoginCheckFilter());
+//        filterRegistrationBean.setOrder(1);
+//        filterRegistrationBean.addUrlPatterns("/*");
+//
+//        return filterRegistrationBean;
+//    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
