@@ -69,8 +69,10 @@ public class NoticeController {
 
     @PostMapping("/boards")
     @Operation(summary = "공지사항을 등록합니다.", description = "공지사항 등록하는 기능입니다.")
-    public ResponseEntity<Map<String, Object>> noticeInsert(NoticeDto noticeDto) {
+    public ResponseEntity<Map<String, Object>> noticeInsert(NoticeDto noticeDto, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
+        UserDto user= (UserDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        noticeDto.setUserId(user.getUserId());
         int ret = noticeService.noticeInsert(noticeDto);
         if (ret == 1) {
             map.put("result", "success");
