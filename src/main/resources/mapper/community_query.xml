@@ -3,29 +3,29 @@
 <mapper namespace="com.ssafy.enjoyTrip.board.dao.BoardDao">
 
     <insert id="boardInsert" parameterType="com.ssafy.enjoyTrip.board.dto.BoardDto">
-			insert into board ( user_id, title, content, reg_dt, read_count )
+			insert into community ( user_id, title, content, reg_dt, read_count )
 			 values ( #{userId}, #{title}, #{content}, now(), 0 );
     </insert>
     
     <update id="boardUpdate" parameterType="com.ssafy.enjoyTrip.board.dto.BoardDto">
-   	 	update board set title = #{title}, content = #{content} where board_id = #{boardId} 
+   	 	update community set title = #{title}, content = #{content} where board_id = #{boardId}
     </update>
     
     <delete id="boardDelete" parameterType="int">
-    	delete from board where board_id = #{boardId}
+    	delete from community where board_id = #{boardId}
     </delete>
     
     <select id = "boardDetail" parameterType="int" 
     resultType="com.ssafy.enjoyTrip.board.dto.BoardDto">
     	SELECT b.BOARD_ID, b.user_id, u.name as userName, u.USER_PROFILE_IMAGE_URL,
-	        	b.TITLE, b.CONTENT, b.REG_DT, b.READ_COUNT FROM BOARD b, user u
+	        	b.TITLE, b.CONTENT, b.REG_DT, b.READ_COUNT FROM community b, user u
 	         	WHERE b.BOARD_ID = #{boardId}
 	        	AND b.user_id = u.user_id
     </select>
     
     <select id="boardListTop" resultType="com.ssafy.enjoyTrip.board.dto.BoardDto">
 	    SELECT b.BOARD_ID, b.user_id, u.NAME as userName, u.USER_PROFILE_IMAGE_URL, b.TITLE, b.CONTENT, b.REG_DT, b.READ_COUNT
-				FROM BOARD b, user u 
+				FROM community b, user u
 				WHERE b.user_id = u.user_id
 				ORDER BY b.READ_COUNT DESC 
 				LIMIT #{limit} 
@@ -33,23 +33,23 @@
     
     <select id = "boardList" parameterType="map" resultType="com.ssafy.enjoyTrip.board.dto.BoardDto">
     SELECT b.BOARD_ID, b.user_id, u.NAME as userName, u.USER_PROFILE_IMAGE_URL, b.TITLE, b.CONTENT, b.REG_DT, b.READ_COUNT
-    		FROM BOARD b, user u 
+    		FROM community b, user u
     		WHERE b.user_id = u.user_id
     		ORDER BY b.BOARD_ID DESC
     		LIMIT #{limit} OFFSET #{offset} 
     </select>
     
     <select id="boardListTotalCnt">
-    	SELECT COUNT(*) FROM BOARD
+    	SELECT COUNT(*) FROM community
     </select>
     
     <select id="boardListSearchWordTotalCnt" parameterType="string">
-		SELECT COUNT(*) FROM BOARD WHERE TITLE LIKE concat("%",#{searchWord},"%")
+		SELECT COUNT(*) FROM community WHERE TITLE LIKE concat("%",#{searchWord},"%")
     </select>
     
     <select id="boardListSearchWord" parameterType="map" resultType="com.ssafy.enjoyTrip.board.dto.BoardDto">
 	    SELECT b.BOARD_ID, b.user_id, u.name as userName, u.USER_PROFILE_IMAGE_URL, b.TITLE, b.CONTENT, b.REG_DT, b.READ_COUNT
-	    		FROM BOARD b, user u
+	    		FROM community b, user u
 				WHERE b.user_id = u.user_id
 				AND b.TITLE like concat("%",#{searchWord},"%") 
 				ORDER BY b.BOARD_ID DESC
