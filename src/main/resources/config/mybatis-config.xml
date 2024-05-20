@@ -15,6 +15,6 @@
 		<mapper resource="mapper/meeting_query.xml" />
 		<mapper resource="mapper/favorite_query.xml"/>
 		<mapper resource="mapper/recommend_query.xml"/>
-		
+		<mapper resource="mapper/notice_query.xml"/>
 	</mappers>
 </configuration>
