@@ -40,7 +40,7 @@ public class LoginController {
 		UserDto loginMember = service.login(email, password);
 
 		if (loginMember != null) {
-			session.setAttribute(SessionConst.LOGIN_MEMBER, "loginMember");
+			session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 			// 반환 값: result
 			log.info("userDto={}", loginMember);
 			return new ResponseEntity<>(Map.of("result", "success", "user", loginMember), HttpStatus.OK);
