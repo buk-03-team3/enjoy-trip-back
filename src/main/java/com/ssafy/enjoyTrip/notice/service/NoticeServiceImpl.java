@@ -64,4 +64,14 @@ public class NoticeServiceImpl implements  NoticeService{
     public List<NoticeDto> noticeListSearchWord(String searchWord, int limit, int offset) {
         return noticeDao.noticeListSearchWord(searchWord, limit, offset);
     }
+
+    @Override
+    public List<NoticeDto> noticeListByNoticeId(String searchWord, int limit, int offset) {
+        return  noticeDao.noticeListByNoticeId(searchWord, limit, offset);
+    }
+
+    @Override
+    public List<NoticeDto> noticeListByUserName(String searchWord, int limit, int offset) {
+        return  noticeDao.noticeListByUserName(searchWord, limit, offset);
+    }
 }

@@ -7,6 +7,7 @@ import com.ssafy.enjoyTrip.user.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +28,31 @@ public class NoticeController {
     @GetMapping("/boards")
     @Operation(summary="공지사항 목록을 조회합니다.", description ="limit, offset, 검색어를 파라미터로 받아 게시글을 검색하여 반환해주는 기능입니다.")
     public ResponseEntity<Map<String, Object>> noticeList(@RequestParam("limit") int limit,
-                                                          @RequestParam("offset") int offset, @RequestParam("searchWord") String searchWord){
+                                                          @RequestParam("offset") int offset,
+                                                          @RequestParam("searchWord") String searchWord,
+                                                          @RequestParam("searchOption") String searchOption){
         Map<String, Object> map = new HashMap<>();
-        List<NoticeDto> noticeList;
+        List<NoticeDto> noticeList ;
+
         if ("".equals(searchWord)) {
             noticeList = noticeService.noticeList(limit, offset);
         } else {
-            noticeList = noticeService.noticeListSearchWord(searchWord,limit, offset);
+            //글번호 noticeId
+            if("noticeId".equals(searchOption)){
+                noticeList = noticeService.noticeListByNoticeId(searchWord,limit,offset);
+            }
+            //작성자 userId..이지만 닉네임으로 검색
+            else if("userId".equals(searchOption)){
+                noticeList = noticeService.noticeListByUserName(searchWord,limit,offset);
+            }
+            //제목 title
+            else if("title".equals(searchOption)){
+                noticeList = noticeService.noticeListSearchWord(searchWord,limit,offset);
+            }
+            //아무 조건에도 속하지 않으면 그냥 전체에 대해서 검색
+            else {
+                noticeList = noticeService.noticeList(limit, offset);
+            }
         }
 
         if(!noticeList.isEmpty()){
