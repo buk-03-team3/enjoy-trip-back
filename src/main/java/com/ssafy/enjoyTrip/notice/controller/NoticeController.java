@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/notice")
 @Tag(name=" 공지사항 컨트롤러 페이지", description = "공지사항 관련 api")
@@ -69,11 +69,12 @@ public class NoticeController {
 
     @PostMapping("/boards")
     @Operation(summary = "공지사항을 등록합니다.", description = "공지사항 등록하는 기능입니다.")
-    public ResponseEntity<Map<String, Object>> noticeInsert(NoticeDto noticeDto, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> noticeInsert(@RequestBody NoticeDto noticeDto, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         UserDto user= (UserDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
         noticeDto.setUserId(user.getUserId());
         int ret = noticeService.noticeInsert(noticeDto);
+        System.out.println(noticeDto);
         if (ret == 1) {
             map.put("result", "success");
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -119,7 +120,16 @@ public class NoticeController {
     public ResponseEntity<Map<String, Object>> noticeDetail(@PathVariable("noticeId") int noticeId, HttpSession session){
         Map<String, Object> map = new HashMap<>();
         //postman에서는 session 존재하지 않기 때문에 error 발생함. dummy data로 test 권장
-        System.out.println(session.getAttribute(SessionConst.LOGIN_MEMBER));
+
+        //로그인 하지 않은 사용자는 글조회는 할 수 있되, admin, sameUser를 모두 false로 두어서 글수정,글삭제에 대한 권한 없도록..
+        if(session.getAttribute(SessionConst.LOGIN_MEMBER)==null){
+            UserDto dummy = new UserDto();
+            dummy.setUserId(-1);
+            NoticeDto noticeDto = noticeService.noticeDetail(noticeId, dummy);
+            map.put("noticeDto",noticeDto);
+            map.put("result", "success");
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+        }
         UserDto userDto = (UserDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
         System.out.println(userDto.getUserId());
         NoticeDto noticeDto = noticeService.noticeDetail(noticeId, userDto);
