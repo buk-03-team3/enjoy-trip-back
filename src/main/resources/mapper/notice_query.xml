@@ -18,7 +18,7 @@
 
     <select id = "noticeDetail" parameterType="int"
             resultType="com.ssafy.enjoyTrip.notice.dto.NoticeDto">
-        SELECT n.notice_id,  n.user_id, u.name as userName, u.USER_PROFILE_IMAGE_URL, u.code,
+        SELECT n.notice_id,  n.user_id, u.name as userName, u.USER_PROFILE_IMAGE_URL, u.code as code,
                n.TITLE, n.CONTENT, n.REG_date, n.READ_COUNT FROM notice n, user u
         WHERE n.notice_id = #{noticeId}
           AND n.user_id = u.user_id

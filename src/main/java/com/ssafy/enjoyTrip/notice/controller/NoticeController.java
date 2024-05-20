@@ -112,14 +112,15 @@ public class NoticeController {
         }
     }
 
-    @GetMapping("boards/{noticeId}")
+    @GetMapping("/boards/{noticeId}")
     @Operation(summary = "게시글을 상세 조회합니다.", description = "게시글을 상세 조회하는 기능입니다.")
     public ResponseEntity<Map<String, Object>> noticeDetail(@PathVariable("noticeId") int noticeId, HttpSession session){
         Map<String, Object> map = new HashMap<>();
         //postman에서는 session 존재하지 않기 때문에 error 발생함. dummy data로 test 권장
+        System.out.println(session.getAttribute(SessionConst.LOGIN_MEMBER));
         UserDto userDto = (UserDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
-
-        NoticeDto noticeDto = noticeService.noticeDetail(noticeId, userDto.getUserId());
+        System.out.println(userDto.getUserId());
+        NoticeDto noticeDto = noticeService.noticeDetail(noticeId, userDto);
 
         map.put("noticeDto",noticeDto);
         map.put("result", "success");

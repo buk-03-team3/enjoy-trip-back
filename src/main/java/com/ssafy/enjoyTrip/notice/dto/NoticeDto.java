@@ -16,7 +16,7 @@ public class NoticeDto {
     String title;
     String content;
     int readCount;
-    LocalDateTime redDate;
+    LocalDateTime regDate;
     private String userName;
     private String userProfileImageUrl;
     private boolean sameUser;

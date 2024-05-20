@@ -19,4 +19,5 @@ public class UserDto {
     private String userProfileImageUrl;
     private String sido;
     private String gugun;
+    private String code;
 }

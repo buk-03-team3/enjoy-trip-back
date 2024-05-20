@@ -70,7 +70,7 @@ public class NoticeTest {
     @DisplayName("noticeDetail dao test")
     @Transactional
     public void noticeDetail(){
-        int noticeId= 3;
+        int noticeId= 30;
         NoticeDto dto = noticeDao.noticeDetail(noticeId);
         System.out.println(dto);
         assertNotNull(dto);
