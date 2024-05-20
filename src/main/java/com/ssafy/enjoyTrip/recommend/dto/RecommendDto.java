@@ -20,8 +20,8 @@ public class RecommendDto {
 	private String addr2;
 	private String zipcode;
 	private String tel;
-	private String first_image;
-	private String first_image2;
+	private String firstImage;
+	private String firstImage2;
 	private int readCount;
 	private int favoriteCount;
 	private int gugunCode;
