@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 
 import com.ssafy.enjoyTrip.community.dao.CommunityDao;
 import com.ssafy.enjoyTrip.community.dto.CommunityDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CommunityServiceImpl implements CommunityService {
@@ -46,7 +48,8 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Override
     public List<CommunityDto> communityList(int limit, int offset) {
-        return communityDao.communityList(limit, offset);
+        List<CommunityDto> list = communityDao.communityList(limit, offset);
+        return list;
     }
 
     @Override

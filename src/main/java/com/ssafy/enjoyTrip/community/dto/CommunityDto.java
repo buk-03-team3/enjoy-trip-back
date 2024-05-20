@@ -8,7 +8,7 @@ import lombok.Data;
 public class CommunityDto {
     private int communityId;
     private int userId;
-    private String userName;
+    private String name;
     private String userProfileImageUrl;
     private String title;
     private String content;
