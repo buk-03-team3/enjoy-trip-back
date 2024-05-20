@@ -108,7 +108,7 @@ public class NoticeController {
 
     @PutMapping("/boards")
     @Operation(summary = "게시글을 수정합니다.", description = "게시글을 수정하는 기능입니다.")
-    public ResponseEntity<Map<String, Object>> noticeUpdate(NoticeDto noticeDto) {
+    public ResponseEntity<Map<String, Object>> noticeUpdate(@RequestBody NoticeDto noticeDto) {
         Map<String, Object> map = new HashMap<>();
         int ret = noticeService.noticeUpdate(noticeDto);
         if (ret == 1) {
