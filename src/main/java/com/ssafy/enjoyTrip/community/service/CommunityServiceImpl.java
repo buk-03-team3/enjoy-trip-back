@@ -1,81 +1,80 @@
-package com.ssafy.enjoyTrip.board.service;
+package com.ssafy.enjoyTrip.community.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.ssafy.enjoyTrip.community.dao.CommunityDao;
+import com.ssafy.enjoyTrip.community.dto.CommunityDto;
 import org.springframework.stereotype.Service;
-
-import com.ssafy.enjoyTrip.board.dao.BoardDao;
-import com.ssafy.enjoyTrip.board.dto.BoardDto;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class BoardServiceImpl implements BoardService {
-    static BoardDto sorted[];
-    private final BoardDao boardDao;
+public class CommunityServiceImpl implements CommunityService {
+    static CommunityDto sorted[];
+    private final CommunityDao communityDao;
 
     @Override
-    public int boardInsert(BoardDto dto) {
-        return boardDao.boardInsert(dto);
+    public int communityInsert(CommunityDto dto) {
+        return communityDao.communityInsert(dto);
     }
 
     @Override
-    public int boardUpdate(BoardDto dto) {
-        return boardDao.boardUpdate(dto);
+    public int communityUpdate(CommunityDto dto) {
+        return communityDao.communityUpdate(dto);
     }
 
     @Override
-    public int boardDelete(int boardId) {
-        return boardDao.boardDelete(boardId);
+    public int communityDelete(int communityId) {
+        return communityDao.communityDelete(communityId);
     }
 
     @Override
-    public BoardDto boardDetail(int boardId, int userId) { // 현재 세션 사용자의 userId
-        BoardDto boardDto = boardDao.boardDetail(boardId);
-        if (boardDto.getUserId() == userId) {
-            boardDto.setSameUser(true);
+    public CommunityDto communityDetail(int communityId, int userId) { // 현재 세션 사용자의 userId
+        CommunityDto communityDto = communityDao.communityDetail(communityId);
+        if (communityDto.getUserId() == userId) {
+            communityDto.setSameUser(true);
         } else {
-            boardDto.setSameUser(false);
+            communityDto.setSameUser(false);
         }
 
-        return boardDto;
+        return communityDto;
     }
 
     @Override
-    public List<BoardDto> boardList(int limit, int offset) {
-        return boardDao.boardList(limit, offset);
+    public List<CommunityDto> communityList(int limit, int offset) {
+        return communityDao.communityList(limit, offset);
     }
 
     @Override
-    public int boardListTotalCnt() {
-        return boardDao.boardListTotalCnt();
+    public int communityListTotalCnt() {
+        return communityDao.communityListTotalCnt();
     }
 
     @Override
-    public List<BoardDto> boardListSearchWord(int limit, int offset, String searchWord) {
-        return boardDao.boardListSearchWord(limit, offset, searchWord);
+    public List<CommunityDto> communityListSearchWord(int limit, int offset, String searchWord) {
+        return communityDao.communityListSearchWord(limit, offset, searchWord);
     }
 
     @Override
-    public int boardListSearchWordTotalCnt(String searchWord) {
-        return boardDao.boardListSearchWordTotalCnt(searchWord);
+    public int communityListSearchWordTotalCnt(String searchWord) {
+        return communityDao.communityListSearchWordTotalCnt(searchWord);
     }
 
     @Override
-    public List<BoardDto> boardListTop(int limit) {
-        ArrayList<BoardDto> dto = (ArrayList<BoardDto>) boardDao.boardListTop(limit);
+    public List<CommunityDto> communityListTop(int limit) {
+        ArrayList<CommunityDto> dto = (ArrayList<CommunityDto>) communityDao.communityListTop(limit);
         Collections.sort(dto, (o1, o2) -> o1.getReadCount() - o2.getReadCount());
         System.out.println("service : " + dto);
-        ArrayList<BoardDto> sortDto = (ArrayList<BoardDto>) sort(dto);
+        ArrayList<CommunityDto> sortDto = (ArrayList<CommunityDto>) sort(dto);
         
         return sortDto.stream().limit(limit).collect(Collectors.toList());
     }
 
-    public List<BoardDto> sort(List<BoardDto> list) {
+    public List<CommunityDto> sort(List<CommunityDto> list) {
         // 사이즈가 1보다 크다면
         if (list.size() > 1) {
             // 왼쪽 오른쪽을 merge 합니다.
@@ -95,13 +94,13 @@ public class BoardServiceImpl implements BoardService {
      * @param list2 오른쪽 배열
      * @return
      */
-    public List<BoardDto> merge(List<BoardDto> list, List<BoardDto> list2) {
+    public List<CommunityDto> merge(List<CommunityDto> list, List<CommunityDto> list2) {
         // 결과가 될 임시 배열입니다.
-        List<BoardDto> result = new ArrayList<>();
+        List<CommunityDto> result = new ArrayList<>();
         int rightIdx = 0;
 
         // 왼쪽 배열을 순환하면서
-        for (BoardDto l : list) {
+        for (CommunityDto l : list) {
 
             // right를 끝까지 돌았는지 / right배열의 값이 l보다 작은지 확인하고,
             while (list2.size() > rightIdx && l.getReadCount() >list2.get(rightIdx).getReadCount()) {

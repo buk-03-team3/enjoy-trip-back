@@ -1,17 +1,17 @@
-package com.ssafy.enjoyTrip.board.controller;
+package com.ssafy.enjoyTrip.community.controller;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ssafy.enjoyTrip.community.dto.CommunityDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ssafy.enjoyTrip.board.dto.BoardDto;
-import com.ssafy.enjoyTrip.board.service.BoardService;
+import com.ssafy.enjoyTrip.community.service.CommunityService;
 import com.ssafy.enjoyTrip.user.dto.UserDto;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,24 +21,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/community")
 @Tag(name = "07. 게시판 컨트롤러 페이지", description = "게시판 관련 api")
-public class BoardController {
-	private final BoardService boardService;
+public class CommunityController {
+	private final CommunityService communityService;
 
-	@GetMapping("/boards")
+	@GetMapping
 	@Operation(summary = "게시글 목록을 조회합니다.", description = "limit, offset, 검색어를 파라미터로 받아 게시글을 검색하여 반환해주는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> boardList(@RequestParam("limit") int limit,
+	public ResponseEntity<Map<String, Object>> communityList(@RequestParam("limit") int limit,
 			@RequestParam("offset") int offset, @RequestParam("searchWord") String searchWord) {
 		Map<String, Object> map = new HashMap<>();
-		List<BoardDto> boardList;
+		List<CommunityDto> communityList;
 
 		if ("".equals(searchWord)) {
-			boardList = boardService.boardList(limit, offset);
+			communityList = communityService.communityList(limit, offset);
 		} else {
-			boardList = boardService.boardListSearchWord(limit, offset, searchWord);
+			communityList = communityService.communityListSearchWord(limit, offset, searchWord);
 		}
 		
-		if (!boardList.isEmpty()) {
-			map.put("boardList", boardList);
+		if (!communityList.isEmpty()) {
+			map.put("communityList", communityList);
 			map.put("result", "success");
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} else {
@@ -47,13 +47,13 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping("/boardListTop")
+	@GetMapping("/communityListTop")
 	@Operation(summary = "상단 게시글 목록을 조회합니다.", description = "limit만큼의 상단 게시글 목록을 조회하는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> boardListTop(@RequestParam("limit") int limit) {
+	public ResponseEntity<Map<String, Object>> communityListTop(@RequestParam("limit") int limit) {
 		Map<String, Object> map = new HashMap<>();
-		List<BoardDto> boardList = boardService.boardListTop(limit);
-		if (!boardList.isEmpty()) {
-			map.put("boardList", boardList);
+		List<CommunityDto> communityList = communityService.communityListTop(limit);
+		if (!communityList.isEmpty()) {
+			map.put("communityList", communityList);
 			map.put("result", "success");
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		} else {
@@ -62,15 +62,15 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping("/boardListTotalCnt")
+	@GetMapping("/communityListTotalCnt")
 	@Operation(summary = "게시글 전체 개수를 조회합니다.", description = "검색어를 파라미터로 받아 해당 게시글의 개수를 반환해주는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> boardListTotalCnt(@RequestParam("searchWord") String searchWord) {
+	public ResponseEntity<Map<String, Object>> communityListTotalCnt(@RequestParam("searchWord") String searchWord) {
 		Map<String, Object> map = new HashMap<>();
 		int totalCnt;
 		if ("".equals(searchWord)) {
-			totalCnt = boardService.boardListTotalCnt();
+			totalCnt = communityService.communityListTotalCnt();
 		} else {
-			totalCnt = boardService.boardListSearchWordTotalCnt(searchWord);
+			totalCnt = communityService.communityListSearchWordTotalCnt(searchWord);
 		}
 
 		if (totalCnt >= 0) {
@@ -83,11 +83,11 @@ public class BoardController {
 		}
 	}
 
-	@PostMapping("/boards")
+	@PostMapping
 	@Operation(summary = "게시글을 등록합니다.", description = "게시글을 등록하는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> boardInsert(BoardDto boardDto) {
+	public ResponseEntity<Map<String, Object>> communityInsert(CommunityDto communityDto) {
 		Map<String, Object> map = new HashMap<>();
-		int ret = boardService.boardInsert(boardDto);
+		int ret = communityService.communityInsert(communityDto);
 		if (ret == 1) {
 			map.put("result", "success");
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -100,11 +100,11 @@ public class BoardController {
 		}
 	}
 
-	@PutMapping("/boards")
+	@PutMapping
 	@Operation(summary = "게시글을 수정합니다.", description = "게시글을 수정하는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> boardUpdate(BoardDto boardDto) {
+	public ResponseEntity<Map<String, Object>> communityUpdate(CommunityDto communityDto) {
 		Map<String, Object> map = new HashMap<>();
-		int ret = boardService.boardUpdate(boardDto);
+		int ret = communityService.communityUpdate(communityDto);
 		if (ret == 1) {
 			map.put("result", "success");
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -114,11 +114,11 @@ public class BoardController {
 		}
 	}
 
-	@DeleteMapping("/boards/{boardId}")
+	@DeleteMapping("/community/{communityId}")
 	@Operation(summary = "게시글을 삭제합니다.", description = "게시글을 삭제하는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> boardDelete(@PathVariable("boardId") int boardId) {
+	public ResponseEntity<Map<String, Object>> communityDelete(@PathVariable("communityId") int communityId) {
 		Map<String, Object> map = new HashMap<>();
-		int ret = boardService.boardDelete(boardId);
+		int ret = communityService.communityDelete(communityId);
 		if (ret == 1) {
 			map.put("result", "success");
 			return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
@@ -128,16 +128,16 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping("boards/{boardId}")
+	@GetMapping("/{communityId}")
 	@Operation(summary = "게시글을 상세 조회합니다.", description = "게시글을 상세 조회하는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> boardDetail(@PathVariable("boardId") int boardId, HttpSession session){
+	public ResponseEntity<Map<String, Object>> communityDetail(@PathVariable("communityId") int communityId, HttpSession session){
 		Map<String, Object> map = new HashMap<>();
 		//postman에서는 session 존재하지 않기 때문에 error 발생함. dummy data로 test 권장
 		UserDto userDto = (UserDto) session.getAttribute("userDto");
 		
-		BoardDto boardDto = boardService.boardDetail(boardId, userDto.getUserId());
+		CommunityDto communityDto = communityService.communityDetail(communityId, userDto.getUserId());
 		
-		map.put("boardDto",boardDto);
+		map.put("communityDto", communityDto);
 		map.put("result", "success");
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}

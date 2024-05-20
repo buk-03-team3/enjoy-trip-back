@@ -1,12 +1,12 @@
-package com.ssafy.enjoyTrip.board.dto;
+package com.ssafy.enjoyTrip.community.dto;
 
 import java.time.LocalDateTime;
 
 import lombok.Data;
 
 @Data
-public class BoardDto {
-    private int boardId;
+public class CommunityDto {
+    private int communityId;
     private int userId;
     private String userName;
     private String userProfileImageUrl;

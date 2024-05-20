@@ -1,4 +1,4 @@
-package com.ssafy.enjoyTrip.board;
+package com.ssafy.enjoyTrip.community;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,60 +11,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.enjoyTrip.board.dto.BoardDto;
-import com.ssafy.enjoyTrip.board.service.BoardService;
+import com.ssafy.enjoyTrip.community.dto.CommunityDto;
+import com.ssafy.enjoyTrip.community.service.CommunityService;
 
 @SpringBootTest
-public class BoardServiceTest {
+public class CommunityServiceTest {
 
 	@Autowired
-	BoardService boardService;
+	CommunityService communityService;
 	
 	@Test
 	public void testDi() {
-		assertNotNull(boardService);
+		assertNotNull(communityService);
 	}
 
 	@Test
 	@Transactional
-	public void testBoardInsert() {
-		BoardDto dto = new BoardDto();
+	public void testcommunityInsert() {
+		CommunityDto dto = new CommunityDto();
 		dto.setContent("testDto22");
 		dto.setTitle("TEST22");
 		dto.setUserId(1);
-		System.out.println(boardService.boardInsert(dto));
-		assertEquals(1, boardService.boardInsert(dto));
+		System.out.println(communityService.communityInsert(dto));
+		assertEquals(1, communityService.communityInsert(dto));
 	}
 
 	@Test
 	@Transactional
 	public void testBoardUpdate() {
-		BoardDto dto = new BoardDto();
+		CommunityDto dto = new CommunityDto();
 		dto.setContent("testDto");
 		dto.setTitle("TESTUpdate");
 		dto.setUserId(1);
-		assertEquals(1, boardService.boardInsert(dto));
+		assertEquals(1, communityService.communityInsert(dto));
 	}
 
 	@Test
 	@Transactional
-	public void testBoardDelete() {
+	public void testcommunityDelete() {
 		int boardId = 24;
-		assertEquals(1, boardService.boardDelete(boardId));
+		assertEquals(1, communityService.communityDelete(boardId));
 	}
 
 	@Test
-	public void testBoardDetail() {
+	public void testcommunityDetail() {
 		int boardId = 24;
 		int userId= 5;
-		BoardDto dto = boardService.boardDetail(boardId, userId);
+		CommunityDto dto = communityService.communityDetail(boardId, userId);
 		System.out.println(dto);
 		assertNotNull(dto);
 	}
 
 	@Test
-	public void testBoardListTop() {
-		List<BoardDto> list = boardService.boardListTop(8);
+	public void testcommunityListTop() {
+		List<CommunityDto> list = communityService.communityListTop(8);
 		System.out.println(list);
 		assertEquals(list.size(), 8);
 	}
@@ -73,20 +73,20 @@ public class BoardServiceTest {
 	public void testBoardList() {
 		int limit = 8;
 		int offset= 5;
-		List<BoardDto> list = boardService.boardList(limit, offset);
+		List<CommunityDto> list = communityService.communityList(limit, offset);
 		System.out.println(list);
 		assertEquals(list.size(), 5);		
 	}
 	
 	@Test
 	public void testBoardListTotalCnt() {
-		assertThat(boardService.boardListTotalCnt()).isGreaterThan(1);
+		assertThat(communityService.communityListTotalCnt()).isGreaterThan(1);
 	}
 	
 	@Test
 	public void testBoardListSearchWordTotalCnt() {
 		String searchWord = "번";
-		assertEquals(6, boardService.boardListSearchWordTotalCnt(searchWord));
+		assertEquals(6, communityService.communityListSearchWordTotalCnt(searchWord));
 	}
 	
 	@Test
@@ -94,7 +94,7 @@ public class BoardServiceTest {
 		String searchWord="번";
 		int limit = 8;
 		int offset =0;
-		List<BoardDto> list = boardService.boardListSearchWord(limit, offset, searchWord); 
+		List<CommunityDto> list = communityService.communityListSearchWord(limit, offset, searchWord);
 		System.out.println("testBoardListSearchWord"+list);
 		assertThat(list.size()).isGreaterThan(1);
 	}
