@@ -28,6 +28,12 @@
     	delete from user where user_id=#{userId}
     </delete>
 
+    <select id="findPassword" parameterType="string">
+        select password
+          from user
+         where email=#{email}
+    </select>
+
     <update id="updateUserProfileImage" parameterType="java.util.Map">
         update user
         set user_profile_image_url=#{userProfileImageUrl}

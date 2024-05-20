@@ -63,6 +63,11 @@ public class UserServiceImpl implements UserService{
 		return userDao.userDelete(userId);
 	}
 
+	@Override
+	public String findPassword(String email) {
+		return userDao.findPassword(email);
+	}
+
 
 	/**
 	 * putObject() 메소드가 파일을 저장해주는 메소드

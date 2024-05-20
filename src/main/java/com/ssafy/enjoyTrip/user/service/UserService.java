@@ -10,6 +10,6 @@ public interface UserService {
 	UserDto userDetail(int userId);
 	int userUpdate(UserDto userDto);
 	int userDelete(int userId);
-
+	String findPassword(String email);
 	String updateUserProfileImage(int userId, MultipartFile file) throws IOException;
 }

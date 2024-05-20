@@ -31,12 +31,16 @@ public class UserController {
 		UserDto dto = userService.userDetail(userId);
 		return dto;
 	}
-	
-//	@GetMapping("/users/find/{email}")
-//	public String findPassword(@PathVariable("email") String email) {
-//		// TODO: implement find password
-//		return "password";
-//	}
+
+	@GetMapping("/find/{email}")
+	public ResponseEntity<Map<String, Object>> findPassword(@PathVariable("email") String email) {
+		String result = userService.findPassword(email);
+
+		if(!"".equals(result)){
+			return new ResponseEntity<>(Map.of("result", "success", "password", result), HttpStatus.OK);
+		}
+        return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	@PostMapping
 	@Operation(summary = "User 회원가입", description = "User의 회원가입 기능입니다.")

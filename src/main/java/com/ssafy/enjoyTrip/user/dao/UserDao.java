@@ -14,5 +14,6 @@ public interface UserDao {
 	UserDto userDetail(int userId);
 	int userUpdate(UserDto userDto);
 	int userDelete(int userId);
+	String findPassword(String email);
 	int updateUserProfileImage(Map<String, Object> paramMap) throws IOException;
 }
