@@ -21,7 +21,9 @@
 	from meeting m  join attraction_info a
 					join user u
 	where a.attraction_id = m.attraction_id
-	  and m.user_id = u.user_id;																						   join user u where a.attraction_id = m.attraction_id and m.user_id = u.user_id;
+	  and m.user_id = u.user_id
+	ORDER BY m.meeting_start_date DESC
+		LIMIT #{limit} OFFSET #{offset}
 </select>
 
 <update id="meetingUpdate" parameterType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
