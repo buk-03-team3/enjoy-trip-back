@@ -56,6 +56,11 @@ public class NoticeServiceImpl implements  NoticeService{
     }
 
     @Override
+    public int noticeListUserNameTotalCnt(String searchWord) {
+        return noticeDao.noticeListUserNameTotalCnt(searchWord);
+    }
+
+    @Override
     public int noticeListSearchWordTotalCnt(String searchWord) {
         return noticeDao.noticeListSearchWordTotalCnt(searchWord);
     }
