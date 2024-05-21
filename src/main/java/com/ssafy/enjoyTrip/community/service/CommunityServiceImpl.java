@@ -1,21 +1,32 @@
 package com.ssafy.enjoyTrip.community.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.ssafy.enjoyTrip.community.dao.CommunityDao;
 import com.ssafy.enjoyTrip.community.dto.CommunityDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class CommunityServiceImpl implements CommunityService {
+    private final AmazonS3Client amazonS3Client;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
+
+
     static CommunityDto sorted[];
     private final CommunityDao communityDao;
 
@@ -75,6 +86,41 @@ public class CommunityServiceImpl implements CommunityService {
         ArrayList<CommunityDto> sortDto = (ArrayList<CommunityDto>) sort(dto);
         
         return sortDto.stream().limit(limit).collect(Collectors.toList());
+    }
+
+    @Override
+    public String uploadImage(MultipartFile image) throws IOException {
+        String originalFilename = image.getOriginalFilename();
+
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(image.getSize());
+        metadata.setContentType(image.getContentType());
+
+        try {
+            // S3에 파일 업로드
+            log.info(originalFilename);
+            amazonS3Client.putObject(bucket, originalFilename, image.getInputStream(), metadata);
+        } catch (Exception e) {
+            // 업로드 실패 시 예외를 던져 이후 로직이 실행되지 않도록 함
+            throw new IOException("Failed to upload file to S3", e);
+        }
+        return amazonS3Client.getUrl(bucket, originalFilename).toString();
+    }
+
+    @Override
+    public int deleteImage(String imageName) {
+        try {
+            boolean isObjectExist = amazonS3Client.doesObjectExist(bucket, imageName);
+            System.out.println(isObjectExist);
+            if (isObjectExist) {
+                amazonS3Client.deleteObject(bucket, imageName);
+            }
+            amazonS3Client.deleteObject(bucket, imageName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
     }
 
     public List<CommunityDto> sort(List<CommunityDto> list) {

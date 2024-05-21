@@ -1,5 +1,6 @@
 package com.ssafy.enjoyTrip.community.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import com.ssafy.enjoyTrip.user.dto.UserDto;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RestController
@@ -118,6 +120,26 @@ public class CommunityController {
 
 		if(communityDto != null) {
 			return new ResponseEntity<>(Map.of("result", "success", "community", communityDto), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@PostMapping(value = "/uploadImage", consumes = { "multipart/form-data"})
+	public ResponseEntity<Map<String, String>> uploadImage(@RequestPart("image") MultipartFile image) throws IOException {
+		String imageUrl = communityService.uploadImage(image);
+		if(!"".equals(imageUrl)) {
+			return new ResponseEntity<>(Map.of("result", "success", "imageUrl", imageUrl), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@PostMapping(value = "/deleteImage/{imageName}")
+	public ResponseEntity<Map<String, String>> deleteImage(@PathVariable String imageName) {
+		int ret = communityService.deleteImage(imageName);
+		if(ret == 1) {
+			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
+		} else if (ret == -1) {
+			return new ResponseEntity<>(Map.of("result", "fail", "message", "aws 서버 오류"), HttpStatus.BAD_GATEWAY);
 		}
 		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
