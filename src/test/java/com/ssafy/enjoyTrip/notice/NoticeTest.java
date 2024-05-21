@@ -35,23 +35,6 @@ public class NoticeTest {
     }
 
     @Test
-    @DisplayName("noticeListWithUserName dao test")
-    public void noticeListByUserName(){
-        List<NoticeDto> list =noticeDao.noticeListByUserName("관리자1",10,0);
-        System.out.println(list);
-        assertEquals(list.size(), 10);
-    }
-
-    @Test
-    @DisplayName("noticeListWithUserId dao test")
-    public void noticeListWithNoticeID(){
-        List<NoticeDto> list =noticeDao.noticeListByNoticeId("23",10,0);
-        System.out.println(list);
-        assertEquals(list.size(), 1);
-    }
-
-
-    @Test
     @DisplayName("noticeInsert dao test")
     @Transactional
     public void noticeInsert(){

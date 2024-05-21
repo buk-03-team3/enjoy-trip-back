@@ -54,9 +54,7 @@ public class NoticeController {
                 noticeList = noticeService.noticeList(limit, offset);
             }
         }
-        System.out.printf("%d,%d,%s,%s",limit,offset,searchWord,searchOption);
 
-        System.out.println("뭔데: " + noticeList);
         if(!noticeList.isEmpty()){
             map.put("noticeList", noticeList);
             map.put("result", "success");
