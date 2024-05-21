@@ -1,5 +1,6 @@
 package com.ssafy.enjoyTrip.meeting.dao;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
@@ -7,5 +8,10 @@ import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 @Mapper
 public interface MeetingDao {
 	public int meetingInsert(MeetingDto dto);
-	public int meetingSelect(int meetingId);
+	public MeetingDto meetingSelect(int meetingId);
+	public List<MeetingDto> meetingList();
+	public int meetingUpdate(MeetingDto dto);
+	public int meetingDelete(int meetingId);
+
+	public List<MeetingDto> myMeetingList(int userId);
 }

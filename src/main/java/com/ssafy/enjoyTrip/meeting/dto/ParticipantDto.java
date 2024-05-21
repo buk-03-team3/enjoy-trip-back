@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class ParticipantDto {
-	int travelPlanMemberSeq;
 	int meetingId;
-	int participantId;
+	int userId;
+	String name;
+	String email;
+	String userProfileImageUrl;
 	String authority;
 }

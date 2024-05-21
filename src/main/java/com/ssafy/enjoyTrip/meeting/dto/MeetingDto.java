@@ -1,8 +1,6 @@
 package com.ssafy.enjoyTrip.meeting.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
@@ -12,7 +10,13 @@ public class MeetingDto {
 	String title;
 	String content;
 	String meetingPassword;
+	String userName;
+	String addr1;
+	String firstImage;
+	String firstImage2;
 	int attractionId;
+	private double latitude;
+	private double longitude;
 	LocalDateTime meetingStartDate;
 	LocalDateTime meetingEndDate;
 }
