@@ -78,8 +78,11 @@ public class UserController {
 	@Operation(summary = "사용자 프로필 이미지 변경", description = "사용자의 프로필 이미지를 변경하는 기능입니다.")
 	public ResponseEntity<Map<String, Object>> userProfileImagePathUpdate(
 			@PathVariable("userId") int userId,
+			@RequestPart(value = "preProfileImageUrl", required = false) String preProfileImageUrl,
 			@RequestPart("profileImage") MultipartFile file) throws IOException {
-		String ret = userService.updateUserProfileImage(userId, file);
+
+		log.info("preProfile: {}", preProfileImageUrl);
+		String ret = userService.updateUserProfileImage(userId, preProfileImageUrl, file);
 		Map<String, Object> result = new HashMap<>();
 
 		if(!"default".equals(ret)){

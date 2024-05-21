@@ -3,10 +3,12 @@ package com.ssafy.enjoyTrip.user.service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService{
-	private final AmazonS3 amazonS3;
+	private final AmazonS3Client amazonS3Client;
 
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucket;
@@ -75,8 +77,14 @@ public class UserServiceImpl implements UserService{
 	 * 만약 MultipartFile에 대해 잘 모르거나 웹 페이지에서 form으로 파일을 입력받고 싶다면 [Spring Boot] 파일 업로드 참고
 	 * */
 	@Override
-	public String updateUserProfileImage(int userId, MultipartFile multipartFile) throws IOException {
+	public String updateUserProfileImage(int userId, String preProfileImageUrl, MultipartFile multipartFile) throws IOException {
 		String originalFilename = multipartFile.getOriginalFilename();
+		int dotIndex = originalFilename.lastIndexOf('.');
+
+		String filename = originalFilename.substring(0, dotIndex);
+		String extension = originalFilename.substring(dotIndex + 1);
+		String uuid = UUID.randomUUID().toString();
+		String newFilename = filename + uuid + "." + extension;
 
 		ObjectMetadata metadata = new ObjectMetadata();
 		metadata.setContentLength(multipartFile.getSize());
@@ -84,13 +92,24 @@ public class UserServiceImpl implements UserService{
 
 		try {
 			// S3에 파일 업로드
-			amazonS3.putObject(bucket, originalFilename, multipartFile.getInputStream(), metadata);
+			amazonS3Client.putObject(bucket, newFilename, multipartFile.getInputStream(), metadata);
 		} catch (Exception e) {
 			// 업로드 실패 시 예외를 던져 이후 로직이 실행되지 않도록 함
 			throw new IOException("Failed to upload file to S3", e);
 		}
 
-		String userProfileImageUrl = amazonS3.getUrl(bucket, originalFilename).toString();
+		if(!("default".equals(preProfileImageUrl) || preProfileImageUrl == null || "".equals(preProfileImageUrl))){
+			try {
+				boolean isObjectExist = amazonS3Client.doesObjectExist(bucket, preProfileImageUrl);
+				if (isObjectExist) {
+					amazonS3Client.deleteObject(bucket, preProfileImageUrl);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		String userProfileImageUrl = amazonS3Client.getUrl(bucket, newFilename).toString();
 
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("userId", userId);
@@ -98,7 +117,7 @@ public class UserServiceImpl implements UserService{
 
 		int ret = userDao.updateUserProfileImage(paramMap);
 
-		if(ret == 1) {
+		if (ret == 1) {
 			return userProfileImageUrl;
 		} else {
 			return null;
