@@ -67,12 +67,14 @@ public class NoticeController {
     
     @GetMapping("/noticeListTotalCnt")
     @Operation(summary = "공지사항 전체 개수를 조회합니다." , description = "검색어를 파라미터로 받아 해당 공지사항의 개수를 반환해주는 기능입니다.")
-    public ResponseEntity<Map<String, Object>> noticeListTotalCnt(@RequestParam("searchWord") String searchWord) {
+    public ResponseEntity<Map<String, Object>> noticeListTotalCnt(@RequestParam("searchWord") String searchWord, @RequestParam("searchOption")String searchOption) {
         Map<String, Object> map = new HashMap<>();
         int totalCnt;
         if ("".equals(searchWord)) {
             totalCnt = noticeService.noticeListTotalCnt();
-        } else {
+        }else if("userId".equals(searchOption)){
+            totalCnt = noticeService.noticeListUserNameTotalCnt(searchWord);
+        }else {
             totalCnt = noticeService.noticeListSearchWordTotalCnt(searchWord);
         }
 

@@ -18,4 +18,5 @@ public interface NoticeService {
     public List<NoticeDto> noticeListSearchWord(String searchWord ,int limit, int offset);
     public List<NoticeDto> noticeListByNoticeId(String noticeId ,int limit, int offset);
     public List<NoticeDto> noticeListByUserName(String userName ,int limit, int offset);
+    public int noticeListUserNameTotalCnt(String userId);
 }
