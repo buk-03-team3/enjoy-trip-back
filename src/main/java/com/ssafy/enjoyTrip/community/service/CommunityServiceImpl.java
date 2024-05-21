@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.ssafy.enjoyTrip.community.dao.CommunityDao;
 import com.ssafy.enjoyTrip.community.dto.CommunityDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -91,37 +89,40 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public String uploadImage(MultipartFile image) throws IOException {
         String originalFilename = image.getOriginalFilename();
+        int dotIndex = originalFilename.lastIndexOf('.');
+
+        String filename = originalFilename.substring(0, dotIndex);
+        String extension = originalFilename.substring(dotIndex+1);
+        String uuid = UUID.randomUUID().toString();
+        String newFilename = filename + uuid + "." + extension;
 
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(image.getSize());
         metadata.setContentType(image.getContentType());
 
         try {
-            // S3에 파일 업로드
-            log.info(originalFilename);
-            amazonS3Client.putObject(bucket, originalFilename, image.getInputStream(), metadata);
+            amazonS3Client.putObject(bucket, newFilename, image.getInputStream(), metadata);
         } catch (Exception e) {
-            // 업로드 실패 시 예외를 던져 이후 로직이 실행되지 않도록 함
             throw new IOException("Failed to upload file to S3", e);
         }
-        return amazonS3Client.getUrl(bucket, originalFilename).toString();
+        // Return both URL and filename with UUID
+        return amazonS3Client.getUrl(bucket, newFilename).toString();
     }
 
     @Override
     public int deleteImage(String imageName) {
         try {
             boolean isObjectExist = amazonS3Client.doesObjectExist(bucket, imageName);
-            System.out.println(isObjectExist);
             if (isObjectExist) {
                 amazonS3Client.deleteObject(bucket, imageName);
             }
-            amazonS3Client.deleteObject(bucket, imageName);
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
         return 1;
     }
+
 
     public List<CommunityDto> sort(List<CommunityDto> list) {
         // 사이즈가 1보다 크다면
