@@ -3,8 +3,8 @@
 <mapper namespace="com.ssafy.enjoyTrip.community.dao.CommunityDao">
 
     <insert id="communityInsert" parameterType="com.ssafy.enjoyTrip.community.dto.CommunityDto">
-			INSERT INTO community ( category, user_id, title, content, reg_dt, read_count )
-			     VALUES ( #{category}, #{userId}, #{title}, #{content}, now(), 0 );
+			INSERT INTO community ( category, user_id, user_name, user_profile_image_url, title, content, reg_dt, read_count )
+			     VALUES ( #{category}, #{userId}, #{name}, #{userProfileImageUrl}, #{title}, #{content}, now(), 0 );
     </insert>
     
     <update id="communityUpdate" parameterType="com.ssafy.enjoyTrip.community.dto.CommunityDto">

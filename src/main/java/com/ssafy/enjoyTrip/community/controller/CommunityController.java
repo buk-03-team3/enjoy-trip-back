@@ -79,7 +79,7 @@ public class CommunityController {
 
 	@PostMapping
 	@Operation(summary = "커뮤니티 글을 등록합니다.", description = "커뮤니티 글을 등록하는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> communityInsert(CommunityDto communityDto) {
+	public ResponseEntity<Map<String, Object>> communityInsert(@RequestBody CommunityDto communityDto) {
 		int ret = communityService.communityInsert(communityDto);
 		if (ret == 1) {
 			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
@@ -90,9 +90,9 @@ public class CommunityController {
 		}
 	}
 
-	@PutMapping
+	@PutMapping("/{communityId}")
 	@Operation(summary = "커뮤니티 글을 수정합니다.", description = "커뮤니티 글을 수정하는 기능입니다.")
-	public ResponseEntity<Map<String, Object>> communityUpdate(CommunityDto communityDto) {
+	public ResponseEntity<Map<String, Object>> communityUpdate(@RequestBody CommunityDto communityDto) {
 		int ret = communityService.communityUpdate(communityDto);
 		if (ret == 1) {
 			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
