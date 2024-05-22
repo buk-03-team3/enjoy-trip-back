@@ -153,4 +153,14 @@ public class CommunityController {
 		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
+
+	@GetMapping(value = "/write/{userId}")
+	public ResponseEntity<Map<String, Object>> specificUserWriteCommunity(@PathVariable("userId") int userId) {
+		List<CommunityDto> list = communityService.specificUserWriteCommunity(userId);
+
+		if (!list.isEmpty()) {
+			return new ResponseEntity<>(Map.of("result", "success", "communityList", list), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

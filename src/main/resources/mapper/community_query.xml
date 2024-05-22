@@ -73,4 +73,11 @@
 		 where community_id = #{communityId}
 	</select>
 
+	<select id = "specificUserWriteCommunity" resultType="com.ssafy.enjoyTrip.community.dto.CommunityDto">
+		SELECT *
+		  FROM community
+		 WHERE user_id = #{userId}
+		ORDER BY reg_dt
+	</select>
+
 </mapper>
