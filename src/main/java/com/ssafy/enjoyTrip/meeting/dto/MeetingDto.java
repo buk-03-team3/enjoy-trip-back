@@ -19,4 +19,6 @@ public class MeetingDto {
 	private double longitude;
 	LocalDateTime meetingStartDate;
 	LocalDateTime meetingEndDate;
+	String thumbnailUrl;
+	LocalDateTime regDate;
 }

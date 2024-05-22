@@ -70,6 +70,4 @@ public class MeetingTest {
 		System.out.println(dtoList.size());
 		assertEquals(6,dtoList.size());
 	}
-
-
 }
