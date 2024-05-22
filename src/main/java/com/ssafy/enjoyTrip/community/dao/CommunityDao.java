@@ -17,5 +17,6 @@ public interface CommunityDao {
 	List<CommunityDto> communityListTop(int limit);
 	int communityListSearchWordTotalCnt(String searchWord);
 	List<CommunityDto> communityListSearchWord(@Param("limit") int limit, @Param("offset") int offset, @Param("searchWord") String searchWord);
-
+	int hit(int data, int communityId);
+	int readHit(int communityId);
 }

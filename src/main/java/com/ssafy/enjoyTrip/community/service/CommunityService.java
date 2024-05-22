@@ -18,4 +18,6 @@ public interface CommunityService {
 	List<CommunityDto> communityListTop(int limit);
 	String uploadImage(MultipartFile image) throws IOException;
 	int deleteImage(String imageName);
+
+	int hit(int communityId);
 }

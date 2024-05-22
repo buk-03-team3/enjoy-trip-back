@@ -61,4 +61,16 @@
 		   LIMIT #{limit} OFFSET #{offset}
 	</select>
 
+	<update id="hit" parameterType="int">
+		UPDATE community
+		   SET read_count = #{data}
+		 WHERE community_id = #{communityId}
+	</update>
+
+	<select id="readHit" parameterType="int">
+		select read_count
+		  from community
+		 where community_id = #{communityId}
+	</select>
+
 </mapper>

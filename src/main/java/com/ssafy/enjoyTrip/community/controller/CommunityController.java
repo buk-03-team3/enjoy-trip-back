@@ -143,4 +143,14 @@ public class CommunityController {
 		}
 		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+
+	@PutMapping(value = "/hit/{communityId}")
+	public ResponseEntity<Map<String, String>> deleteImage(@PathVariable int communityId) {
+		int ret = communityService.hit(communityId);
+		if(ret == 1) {
+			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+
+	}
 }

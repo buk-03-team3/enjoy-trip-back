@@ -122,6 +122,12 @@ public class CommunityServiceImpl implements CommunityService {
         return 1;
     }
 
+    @Override
+    public int hit(int communityId) {
+        int data = communityDao.readHit(communityId) + 1;
+        return communityDao.hit(data, communityId);
+    }
+
 
     public List<CommunityDto> sort(List<CommunityDto> list) {
         // 사이즈가 1보다 크다면
