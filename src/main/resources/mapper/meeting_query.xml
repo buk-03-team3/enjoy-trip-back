@@ -9,7 +9,7 @@
 </insert>
 
 <select id="meetingDetail" parameterType="int" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
-	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2, a.latitude, a.longitude, u.name as userName, u.user_profile_image_url, m.reg_Date
+	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2, a.latitude, a.longitude, u.name, u.user_profile_image_url, m.reg_Date
 	from meeting m join attraction_info a
 				   join user u
 	where a.attraction_id = m.attraction_id

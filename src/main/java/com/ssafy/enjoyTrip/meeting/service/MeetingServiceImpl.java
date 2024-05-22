@@ -4,12 +4,14 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.ssafy.enjoyTrip.meeting.dao.MeetingDao;
 import com.ssafy.enjoyTrip.meeting.dao.ParticipantDao;
+import com.ssafy.enjoyTrip.meeting.dto.MeetingDetailDto;
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import com.ssafy.enjoyTrip.meeting.dto.ParticipantDto;
 import com.ssafy.enjoyTrip.user.dao.UserDao;
 import com.ssafy.enjoyTrip.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -37,8 +39,12 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
-    public MeetingDto meetingDetail(int meetingId, UserDto dto) {
+    public MeetingDetailDto meetingDetail(int meetingId, UserDto dto) {
+        MeetingDetailDto detailDto = new MeetingDetailDto();
         MeetingDto meetingDto = meetingDao.meetingDetail(meetingId);
+        List<ParticipantDto> participantList= participantDao.joinedParticipants(meetingId);
+
+        //모집글을 쓴 사람이 본인인지, 또는 현재 로그인한 사람이 관리자인지
         if(meetingDto.getUserId() == dto.getUserId()){
             meetingDto.setSameUser(true);
         }else{
@@ -48,7 +54,14 @@ public class MeetingServiceImpl implements MeetingService{
         if("1".equals(dto.getCode())){
             meetingDto.setAdmin(true);
         }
-        return meetingDto;
+
+        detailDto.setMeetingDto(meetingDto);
+
+        if(!participantList.isEmpty()){
+            detailDto.setPartiList(participantList);
+        }
+
+        return detailDto;
     }
 
     @Override

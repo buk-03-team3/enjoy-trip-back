@@ -1,6 +1,7 @@
 package com.ssafy.enjoyTrip.meeting.controller;
 
 import com.ssafy.enjoyTrip.SessionConst;
+import com.ssafy.enjoyTrip.meeting.dto.MeetingDetailDto;
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 import com.ssafy.enjoyTrip.meeting.service.MeetingService;
 
@@ -98,18 +99,17 @@ public class MeetingController {
         if(session.getAttribute(SessionConst.LOGIN_MEMBER)==null) {
             UserDto dummy = new UserDto();
             dummy.setUserId(-1);
-            MeetingDto meetingDto = meetingService.meetingDetail(meetingId,dummy);
-            map.put("meetingDto",meetingDto);
+            MeetingDetailDto meetingDetail = meetingService.meetingDetail(meetingId,dummy);
+            map.put("meetingDetail",meetingDetail);
             map.put("result", "success");
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
         }
         UserDto userDto = (UserDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
         System.out.println(userDto.getUserId());
-        MeetingDto meetingDto = meetingService.meetingDetail(meetingId, userDto);
-        map.put("meetingDto",meetingDto);
+        MeetingDetailDto meetingDetail = meetingService.meetingDetail(meetingId, userDto);
+        map.put("meetingDetail",meetingDetail);
         map.put("result", "success");
         return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-
     }
 
     @PostMapping(value = "/writing-image-upload", consumes = { "multipart/form-data"})
