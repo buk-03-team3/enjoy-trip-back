@@ -5,7 +5,7 @@
     <!-- 소모임 참여하기 -->
     <insert id="participantInsert" parameterType="com.ssafy.enjoyTrip.meeting.dto.ParticipantDto">
     insert into meeting_participants(user_id, meeting_id, authority)
-        values (#{userId}, #{meetingId}, #{authority});
+    select #{userId}, #{meetingId}, c.code from code c where c.code_name =#{authority};
 </insert>
     <!-- 이미 참여한 참가자는 참여하기 버튼을 볼 수 없어야 하기 때문에 참여 유무를 먼저 가져온다.-->
     <select id="isParticipant" parameterType="map">

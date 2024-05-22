@@ -11,7 +11,7 @@ public interface ParticipantDao {
     public int participantInsert(ParticipantDto dto);
     public int isParticipant(@Param("userId")int userId, @Param("meetingId")int meetingId);
     public String getAuthority(@Param("userId")int userId, @Param("meetingId")int meetingId);
-    public List<ParticipantDto> getParticipatingMeetings(int userId);
+    public List<MeetingDto> getParticipatingMeetings(int userId);
     public List<ParticipantDto> joinedParticipants(int meetingId);
     public int deleteParticipant(@Param("userId")int userId, @Param("meetingId")int meetingId);
     public int deleteAllParticipant(int meetingId);

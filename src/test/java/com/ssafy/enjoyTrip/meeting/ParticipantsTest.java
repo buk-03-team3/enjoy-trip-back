@@ -70,7 +70,7 @@ public class ParticipantsTest {
     @Test
     public void getParticipatingMeetings(){
         int userId = 4;
-        List<ParticipantDto> dto = dao.getParticipatingMeetings(userId);
+        List<MeetingDto> dto = dao.getParticipatingMeetings(userId);
         System.out.println(dto);
         assertEquals(dto.size() , 8);
     }
