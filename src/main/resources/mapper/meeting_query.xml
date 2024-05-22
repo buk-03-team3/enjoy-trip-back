@@ -3,9 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.enjoyTrip.meeting.dao.MeetingDao">
 <insert id="meetingInsert" parameterType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto"> 
-	 insert into meeting (user_id, user_name, title, content, meeting_password, attraction_id, meeting_start_date, meeting_end_date )
-	 values (#{userId} ,#{userName} , #{title},#{content},#{meetingPassword},
-	 #{attractionId},#{meetingStartDate},#{meetingEndDate});
+	 insert into meeting (user_id, user_name, title, content, meeting_password, attraction_id, meeting_start_date, meeting_end_date, thumbnail_url, reg_date )
+	 values (#{userId}, #{userName}, #{title}, #{content}, #{meetingPassword}, #{attractionId}, #{meetingStartDate}, #{meetingEndDate}, #{thumbnailUrl}, #{regDate})
 </insert>
 
 <select id="meetingDetail" parameterType="int" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">

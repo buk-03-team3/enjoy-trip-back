@@ -35,7 +35,7 @@ public class MeetingServiceImpl implements MeetingService{
 
     @Override
     public int meetingInsert(MeetingDto dto) {
-        return 0;
+        return meetingDao.meetingInsert(dto);
     }
 
     @Override

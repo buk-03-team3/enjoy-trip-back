@@ -13,12 +13,14 @@ import java.util.Map;
 import com.ssafy.enjoyTrip.user.dto.UserDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@Slf4j
 @RestController
 @RequestMapping("/meeting")
 @RequiredArgsConstructor
@@ -56,6 +58,7 @@ public class MeetingController {
 
     @PostMapping("/posts")
     public ResponseEntity<Map<String,Object>> meetingInsert(@RequestBody MeetingDto dto){
+        log.info("dto={}", dto);
         Map<String,Object> map = new HashMap<>();
         int result = meetingService.meetingInsert(dto);
         if(result==1){
