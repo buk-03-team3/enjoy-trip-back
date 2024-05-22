@@ -55,9 +55,29 @@ public class MeetingController {
 
     @PostMapping("/posts")
     public ResponseEntity<Map<String,Object>> meetingInsert(@RequestBody MeetingDto dto){
-        return null;
+        Map<String,Object> map = new HashMap<>();
+        int result = meetingService.meetingInsert(dto);
+        if(result==1){
+            map.put("result","success");
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+        }else{
+            map.put("result","fail");
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+    @PutMapping("/posts")
+    public ResponseEntity<Map<String,Object>> meetingUpdate(@RequestBody MeetingDto meetingDto){
+        Map<String, Object> map = new HashMap<>();
+        int ret = meetingService.meetingUpdate(meetingDto);
+        if (ret == 1) {
+            map.put("result", "success");
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+        } else {
+            map.put("result", "fail");
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @DeleteMapping("/posts/{meetingId}")
     public ResponseEntity<Map<String,Object>> meetingDelete(@PathVariable("meetingId") int meetingId){
 
