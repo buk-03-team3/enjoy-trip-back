@@ -61,6 +61,8 @@ public class MeetingController {
         log.info("dto={}", dto);
         Map<String,Object> map = new HashMap<>();
         int result = meetingService.meetingInsert(dto);
+        System.out.println("result: "+result);
+        System.out.println("dto: "+ dto);
         if(result==1){
             map.put("result","success");
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);

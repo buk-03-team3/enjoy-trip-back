@@ -22,7 +22,7 @@ public class ParticipantController {
     public ResponseEntity<Map<String,Object>> participantInsert(@RequestBody ParticipantDto dto){
         Map<String,Object> map = new HashMap<>();
         int result = participantService.participantInsert(dto);
-        System.out.println(result);
+        System.out.println("result "+result);
         if(result==1){
             map.put("result","success");
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);

@@ -8,7 +8,8 @@
 </insert>
 
 <select id="meetingDetail" parameterType="int" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
-	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2, a.latitude, a.longitude, u.name, u.user_profile_image_url, m.reg_Date
+	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2, a.latitude, a.longitude, m.max_people,
+	       u.name, u.user_profile_image_url, m.reg_Date
 	from meeting m join attraction_info a
 				   join user u
 	where a.attraction_id = m.attraction_id
@@ -16,7 +17,8 @@
 </select>
 
 <select id="meetingList" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
-	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2, u.name as userName, u.user_profile_image_url , m.reg_date, m.thumbnail_url
+	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2,
+	       u.name as userName, u.user_profile_image_url , m.reg_date, m.thumbnail_url , m.max_people
 	FROM meeting m
 			 JOIN attraction_info a ON a.attraction_id = m.attraction_id
 			 JOIN user u ON m.user_id = u.user_id
@@ -31,7 +33,8 @@
 <update id="meetingUpdate" parameterType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
 	update meeting set title=#{title}, content=#{content}, meeting_password=#{meetingPassword},
 	                   meeting_start_date=#{meetingStartDate}, meeting_end_date=#{meetingEndDate},
-	                   attraction_id=#{attractionId}, thumbnail_url = #{thumbnailUrl}
+	                   attraction_id=#{attractionId}, thumbnail_url = #{thumbnailUrl},
+	                   max_people = #{maxPeople}
 	where meeting_id = #{meetingId};
 
 </update>
@@ -41,7 +44,7 @@
 </delete>
 
 <select id="myMeetingList" parameterType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
-	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2, a.latitude, a.longitude, u.name, u.user_profile_image_url, m.reg_date, m.thumbnail_url
+	select a.attraction_id , a.addr1, a.first_image, a.first_image2, a.latitude, a.longitude, u.name, u.user_profile_image_url, m.reg_date, m.thumbnail_url, m.max_people
 	from meeting m join attraction_info a
 				   join user u where a.attraction_id = m.attraction_id
 								 and m.user_id = #{userId} and m.user_id = u.user_id;

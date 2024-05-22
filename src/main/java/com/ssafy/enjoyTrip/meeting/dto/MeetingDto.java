@@ -24,4 +24,5 @@ public class MeetingDto {
 	LocalDateTime regDate;
 	boolean sameUser;
 	boolean admin;
+	int maxPeople;
 }

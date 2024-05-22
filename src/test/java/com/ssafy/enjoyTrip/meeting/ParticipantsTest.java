@@ -26,7 +26,7 @@ public class ParticipantsTest {
         ParticipantDto dto = new ParticipantDto();
         dto.setUserId(4);
         dto.setMeetingId(23);
-        dto.setAuthority("0");
+        dto.setAuthority("WRITE");
         int result = dao.participantInsert(dto);
         assertEquals(1, result);
         }
