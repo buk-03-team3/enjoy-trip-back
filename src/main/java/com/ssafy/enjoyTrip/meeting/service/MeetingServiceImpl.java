@@ -4,6 +4,7 @@ import com.ssafy.enjoyTrip.meeting.dao.MeetingDao;
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,17 +23,12 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
-    public List<MeetingDto> meetingList(int limit, int offset, String searchWord, String searchOption) {
+    public List<MeetingDto> meetingList(int limit, int offset ,String searchTitle,
+                                        String searchAddr,
+                                        String meetingStartDate,
+                                        String meetingEndDate) {
         List<MeetingDto> list;
-        if("".equals(searchWord)){
-            //전체 조회
-            list = meetingDao.meetingList(limit,offset,searchWord);
-        }else if("titleAndContent".equals(searchOption)){
-            //제목과 내용으로 검색
-            list= meetingDao.meetingList(limit,offset,searchWord);
-        }else{ //다른 조건들...
-            list = meetingDao.meetingList(limit,offset,searchWord);
-        }
+        list = meetingDao.meetingList(limit,offset,searchTitle,searchAddr,meetingStartDate, meetingEndDate);
         return list;
     }
 

@@ -12,7 +12,11 @@ public interface MeetingDao {
 	public MeetingDto meetingSelect(int meetingId);
 	public List<MeetingDto> meetingList(@Param("limit") int limit,
 										@Param("offset") int offset,
-										@Param("searchWord") String searchWord);
+										@Param("searchTitle") String searchTitle,
+										@Param("searchAddr") String searchAddr,
+										@Param("meetingStartDate") String meetingStartDate,
+										@Param("meetingEndDate") String meetingEndDate);
+
 	public int meetingUpdate(MeetingDto dto);
 	public int meetingDelete(int meetingId);
 	public List<MeetingDto> myMeetingList(int userId);

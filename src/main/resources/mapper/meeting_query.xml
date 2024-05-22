@@ -18,11 +18,14 @@
 
 <select id="meetingList" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
 	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2, u.name as userName, u.user_profile_image_url , m.reg_date, m.thumbnail_url
-	from meeting m  join attraction_info a
-					join user u
-	where a.attraction_id = m.attraction_id
-	  and m.user_id = u.user_id
-	ORDER BY m.meeting_start_date DESC
+	FROM meeting m
+			 JOIN attraction_info a ON a.attraction_id = m.attraction_id
+			 JOIN user u ON m.user_id = u.user_id
+	WHERE m.title LIKE concat('%', #{searchTitle},'%')
+	  AND a.addr1 LIKE concat('%',#{searchAddr},'%')
+	  AND m.meeting_start_date LIKE concat('%',#{meetingStartDate},'%')
+	  AND m.meeting_end_Date LIKE concat('%',#{meetingEndDate},'%')
+	ORDER BY m.reg_Date DESC
 		LIMIT #{limit} OFFSET #{offset}
 </select>
 

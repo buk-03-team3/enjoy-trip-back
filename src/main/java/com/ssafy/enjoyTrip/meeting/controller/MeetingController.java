@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +33,12 @@ public class MeetingController {
     @GetMapping("/posts")
     public ResponseEntity<Map<String,Object>> meetingList(@RequestParam("limit") int limit,
                                                           @RequestParam("offset") int offset,
-                                                          @RequestParam("searchWord")String searchWord,
-                                                          @RequestParam("searchOption")String searchOption){
+                                                          @RequestParam("searchTitle") String searchTitle,
+                                                          @RequestParam("searchAddr") String searchAddr,
+                                                          @RequestParam("meetingStartDate") String meetingStartDate,
+                                                          @RequestParam("meetingEndDate") String meetingEndDate){
         Map<String,Object> map = new HashMap<>();
-        List<MeetingDto> list=meetingService.meetingList(limit,offset,searchWord,searchOption);
+        List<MeetingDto> list=meetingService.meetingList(limit,offset,searchTitle,searchAddr,meetingStartDate,meetingEndDate);
         if(!list.isEmpty()){
             map.put("list",list);
             map.put("result", "success");

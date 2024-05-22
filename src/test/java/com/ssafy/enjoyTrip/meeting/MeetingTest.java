@@ -70,4 +70,13 @@ public class MeetingTest {
 		System.out.println(dtoList.size());
 		assertEquals(6,dtoList.size());
 	}
+
+	@Test
+	public void getMeetingList(){
+		int limit =10;
+		int offset =0;
+		List<MeetingDto> dtoList = dao.meetingList(limit,offset,"여행","","2024","");
+		System.out.println(dtoList);
+		assertEquals(8,dtoList.size());
+	}
 }
