@@ -6,6 +6,7 @@ import java.util.Map;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import com.ssafy.enjoyTrip.travel.service.TravelService;
 
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/travel")
@@ -67,15 +69,22 @@ public class TravelController {
 	public ResponseEntity<Map<String,Object>> travelListByKeyword(
 			@RequestParam("keyword") String keyword
 			){
-		List<TravelDto> list =travelService.selectTravleListWithKeyword(keyword);
-		Map<String, Object> map = new HashMap<>();
+		List<TravelDto> list =travelService.selectTravelListWithKeyword(keyword);
 		if(list.size()!=0) {
-			map.put("list",list);
-			map.put("result", "success");	
-			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
-		}else {
-			map.put("result","fail");
-			return new ResponseEntity<Map<String,Object>>(map,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(Map.of("list", list, "result", "success"),HttpStatus.OK);
+		}
+		return new ResponseEntity<>(Map.of("result", "fail"),HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@GetMapping("/travelListTop")
+	@Operation(summary = "인기 관광지 목록을 조회합니다.")
+	public ResponseEntity<Map<String, Object>> travelListTop() {
+		List<TravelDto> travelList = travelService.travelListTop();
+		log.info("list: {}", travelList);
+		if (!travelList.isEmpty()) {
+			return new ResponseEntity<>(Map.of("result", "success", "travelList", travelList), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
