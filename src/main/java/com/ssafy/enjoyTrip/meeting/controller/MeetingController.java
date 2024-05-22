@@ -1,20 +1,19 @@
 package com.ssafy.enjoyTrip.meeting.controller;
 
+import com.ssafy.enjoyTrip.SessionConst;
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 import com.ssafy.enjoyTrip.meeting.service.MeetingService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.ssafy.enjoyTrip.user.dto.UserDto;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/meeting")
@@ -56,6 +55,23 @@ public class MeetingController {
         return null;
     }
 
+    @GetMapping("/posts/{meetingId}")
+    public ResponseEntity<Map<String, Object>> meetingDetail(@PathVariable("meetingId") int meetingId,  HttpSession session){
+        Map<String, Object> map = new HashMap<>();
+        if(session.getAttribute(SessionConst.LOGIN_MEMBER)==null) {
+            UserDto dummy = new UserDto();
+            dummy.setUserId(-1);
+            MeetingDto meetingDto = meetingService.meetingDetail(meetingId,dummy);
+            map.put("meetingDto",meetingDto);
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+        }
+        UserDto userDto = (UserDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        System.out.println(userDto.getUserId());
+        MeetingDto meetingDto = meetingService.meetingDetail(meetingId, userDto);
+        map.put("meetingDto",meetingDto);
+        map.put("result", "success");
+        return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
+    }
 
 }

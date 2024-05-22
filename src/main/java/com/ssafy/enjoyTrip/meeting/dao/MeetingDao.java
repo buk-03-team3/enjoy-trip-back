@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MeetingDao {
 	public int meetingInsert(MeetingDto dto);
-	public MeetingDto meetingSelect(int meetingId);
+	public MeetingDto meetingDetail(int meetingId);
 	public List<MeetingDto> meetingList(@Param("limit") int limit,
 										@Param("offset") int offset,
 										@Param("searchTitle") String searchTitle,

@@ -21,4 +21,6 @@ public class MeetingDto {
 	LocalDateTime meetingEndDate;
 	String thumbnailUrl;
 	LocalDateTime regDate;
+	boolean sameUser;
+	boolean admin;
 }
