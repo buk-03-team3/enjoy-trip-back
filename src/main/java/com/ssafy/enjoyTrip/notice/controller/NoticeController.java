@@ -159,5 +159,15 @@ public class NoticeController {
         map.put("result", "success");
         return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
     }
+
+    @PutMapping(value = "/hit/{noticeId}")
+    public ResponseEntity<Map<String, String>> hitNotice(@PathVariable int noticeId) {
+        int ret = noticeService.hit(noticeId);
+        if(ret == 1) {
+            return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
 }
 

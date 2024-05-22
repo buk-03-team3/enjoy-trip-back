@@ -79,4 +79,9 @@ public class NoticeServiceImpl implements  NoticeService{
     public List<NoticeDto> noticeListByUserName(String searchWord, int limit, int offset) {
         return  noticeDao.noticeListByUserName(searchWord, limit, offset);
     }
+    @Override
+    public int hit(int noticeId) {
+        int data = noticeDao.readHit(noticeId) + 1;
+        return noticeDao.hit(data, noticeId);
+    }
 }

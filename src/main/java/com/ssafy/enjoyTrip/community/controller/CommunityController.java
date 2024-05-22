@@ -145,7 +145,7 @@ public class CommunityController {
 	}
 
 	@PutMapping(value = "/hit/{communityId}")
-	public ResponseEntity<Map<String, String>> deleteImage(@PathVariable int communityId) {
+	public ResponseEntity<Map<String, String>> hitCommunity(@PathVariable int communityId) {
 		int ret = communityService.hit(communityId);
 		if(ret == 1) {
 			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);

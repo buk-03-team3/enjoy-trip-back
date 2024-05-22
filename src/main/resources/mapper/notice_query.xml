@@ -75,4 +75,16 @@
             LIMIT #{limit} OFFSET #{offset}
     </select>
 
+    <update id="hit" parameterType="int">
+        UPDATE notice
+        SET read_count = #{data}
+        WHERE notice_id = #{noticeId}
+    </update>
+
+    <select id="readHit" parameterType="int">
+        select read_count
+        from notice
+        where notice_id = #{noticeId}
+    </select>
+
 </mapper>
