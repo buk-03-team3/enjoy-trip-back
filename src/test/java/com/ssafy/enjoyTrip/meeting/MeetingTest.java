@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.time.LocalDateTime;
 
 import java.util.List;
+
+import com.ssafy.enjoyTrip.meeting.service.MeetingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class MeetingTest {
 	@Autowired
 	MeetingDao dao ;
-	
+	@Autowired
+	MeetingService meetingService;
 	@Test
 	public void DI() {
 		assertNotNull(dao);
@@ -71,6 +74,8 @@ public class MeetingTest {
 	@Transactional
 	public void delete(){
 		//participant 데이터가 먼저 삭제되어야 함
+		int result =meetingService.meetingDelete(30);
+		assertEquals(result,1);
 	}
 
 	@Test

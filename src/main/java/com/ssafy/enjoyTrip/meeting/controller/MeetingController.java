@@ -58,6 +58,20 @@ public class MeetingController {
         return null;
     }
 
+    @DeleteMapping("/posts/{meetingId}")
+    public ResponseEntity<Map<String,Object>> meetingDelete(@PathVariable("meetingId") int meetingId){
+
+        Map<String, Object> map = new HashMap<>();
+        int ret = meetingService.meetingDelete(meetingId);
+        if (ret == 1) {
+            map.put("result", "success");
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+        } else {
+            map.put("result", "fail");
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/posts/{meetingId}")
     public ResponseEntity<Map<String, Object>> meetingDetail(@PathVariable("meetingId") int meetingId,  HttpSession session){
         Map<String, Object> map = new HashMap<>();

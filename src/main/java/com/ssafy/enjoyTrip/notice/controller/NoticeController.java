@@ -124,7 +124,7 @@ public class NoticeController {
 
     @DeleteMapping("/boards/{noticeId}")
     @Operation(summary = "게시글을 삭제합니다.", description = "게시글을 삭제하는 기능입니다.")
-    public ResponseEntity<Map<String, Object>> noticeUpdate(@PathVariable("noticeId") int noticeId) {
+    public ResponseEntity<Map<String, Object>> noticeDelete(@PathVariable("noticeId") int noticeId) {
         Map<String, Object> map = new HashMap<>();
         int ret = noticeService.noticeDelete(noticeId);
         if (ret == 1) {

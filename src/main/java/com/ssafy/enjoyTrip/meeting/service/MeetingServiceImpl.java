@@ -3,6 +3,7 @@ package com.ssafy.enjoyTrip.meeting.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.ssafy.enjoyTrip.meeting.dao.MeetingDao;
+import com.ssafy.enjoyTrip.meeting.dao.ParticipantDao;
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -26,6 +28,7 @@ public class MeetingServiceImpl implements MeetingService{
 
     private final AmazonS3Client amazonS3Client;
     private final MeetingDao meetingDao;
+    private final ParticipantDao participantDao;
     private final UserDao userDao;
 
     @Override
@@ -64,8 +67,15 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
+    @Transactional
     public int meetingDelete(int meetingId) {
-        return 0;
+        int resultParticipants =participantDao.deleteAllParticipant(meetingId);
+        int resulMeetingDelete =meetingDao.meetingDelete(meetingId);
+        System.out.println(resultParticipants+ " " + resulMeetingDelete);
+        if(resulMeetingDelete!=-1 && resultParticipants!=-1){
+            return 1;
+        }
+        return -1;
     }
 
     @Override
