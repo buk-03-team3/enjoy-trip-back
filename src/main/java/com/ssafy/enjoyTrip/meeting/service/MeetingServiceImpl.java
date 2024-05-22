@@ -1,18 +1,30 @@
 package com.ssafy.enjoyTrip.meeting.service;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.ssafy.enjoyTrip.meeting.dao.MeetingDao;
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
+
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import com.ssafy.enjoyTrip.user.dao.UserDao;
 import com.ssafy.enjoyTrip.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
 public class MeetingServiceImpl implements MeetingService{
+
+    @Value("${cloud.aws.s3.meeting-bucket}")
+    private String bucket;
+
+    private final AmazonS3Client amazonS3Client;
     private final MeetingDao meetingDao;
     private final UserDao userDao;
 
@@ -60,4 +72,46 @@ public class MeetingServiceImpl implements MeetingService{
     public List<MeetingDto> myMeetingList(int userId) {
         return null;
     }
+
+    @Override
+    public String meetingWritingImageUpload(MultipartFile image) throws IOException {
+        String originalFilename = image.getOriginalFilename();
+        int dotIndex = originalFilename.lastIndexOf('.');
+
+        String filename = originalFilename.substring(0, dotIndex);
+        String extension = originalFilename.substring(dotIndex+1);
+        String uuid = UUID.randomUUID().toString();
+        String newFilename = filename + uuid + "." + extension;
+
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(image.getSize());
+        metadata.setContentType(image.getContentType());
+
+        try {
+            amazonS3Client.putObject(bucket, newFilename, image.getInputStream(), metadata);
+        } catch (Exception e) {
+            throw new IOException("Failed to upload file to S3", e);
+        }
+        return amazonS3Client.getUrl(bucket, newFilename).toString();
+    }
+
+    @Override
+    public String meetingWritingImageDelete(String imageName) {
+        String result = "";
+        if(("".equals(imageName) || "default".equals(imageName) ||imageName == null)){
+            return "잘못된 이미지 이름입니다.";
+        }
+
+        try {
+            boolean isImageExist = amazonS3Client.doesObjectExist(bucket, imageName);
+            if(isImageExist) {
+                amazonS3Client.deleteObject(bucket, imageName);
+                result = "success";
+            }
+        } catch (Exception e) {
+            result = e.getMessage();
+        }
+        return result;
+    }
+
 }

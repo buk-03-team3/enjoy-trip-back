@@ -3,6 +3,8 @@ package com.ssafy.enjoyTrip.meeting.controller;
 import com.ssafy.enjoyTrip.SessionConst;
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 import com.ssafy.enjoyTrip.meeting.service.MeetingService;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/meeting")
@@ -72,6 +75,24 @@ public class MeetingController {
         map.put("result", "success");
         return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
+    }
+
+    @PostMapping(value = "/writing-image-upload", consumes = { "multipart/form-data"})
+    public ResponseEntity<Map<String, String>> meetingWritingImageUpload(@RequestPart("image") MultipartFile image) throws IOException {
+        String url = meetingService.meetingWritingImageUpload(image);
+        if(!("".equals(url) || url == null)) {
+            return new ResponseEntity<>(Map.of("result", "success", "url", url), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PostMapping(value = "/writing-image-delete/{imageName}")
+    public ResponseEntity<Map<String, String>> meetingWritingImageDelete(@PathVariable("imageName") String imageName) throws IOException {
+        String result = meetingService.meetingWritingImageDelete(imageName);
+        if("success".equals(result)) {
+            return new ResponseEntity<>(Map.of("result", result), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Map.of("result", result), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
