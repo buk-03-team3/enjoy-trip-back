@@ -14,6 +14,7 @@ public class MeetingDto {
 	String addr1;
 	String firstImage;
 	String firstImage2;
+	String userProfileImageUrl;
 	int attractionId;
 	private double latitude;
 	private double longitude;

@@ -44,6 +44,16 @@ public class MeetingTest {
 
 	@Test
 	@Transactional
+	public void detail(){
+//		MeetingDto dto =new MeetingDto();
+//		dto.setMeetingId(23);
+//		dto.setUserId(-1);
+		MeetingDto dto =dao.meetingDetail(23);
+		System.out.println("dto : "+dto);
+	}
+
+	@Test
+	@Transactional
 	public void update(){
 		MeetingDto dto = new MeetingDto();
 		dto.setMeetingId(31);

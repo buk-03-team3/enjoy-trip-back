@@ -66,6 +66,7 @@ public class MeetingController {
             dummy.setUserId(-1);
             MeetingDto meetingDto = meetingService.meetingDetail(meetingId,dummy);
             map.put("meetingDto",meetingDto);
+            map.put("result", "success");
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
         }
         UserDto userDto = (UserDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
