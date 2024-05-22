@@ -137,4 +137,9 @@ public class MeetingServiceImpl implements MeetingService{
         return result;
     }
 
+    @Override
+    public List<MeetingDto> specificUserMeetingList(int userId) {
+        return meetingDao.specificUserMeetingList(userId);
+    }
+
 }

@@ -20,4 +20,5 @@ public interface MeetingDao {
 	public int meetingUpdate(MeetingDto dto);
 	public int meetingDelete(int meetingId);
 	public List<MeetingDto> myMeetingList(int userId);
+	List<MeetingDto> specificUserMeetingList(int userId);
 }

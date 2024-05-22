@@ -135,4 +135,12 @@ public class MeetingController {
         return new ResponseEntity<>(Map.of("result", result), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @GetMapping("/write/{userId}")
+    public ResponseEntity<Map<String,Object>> specificUserMeetingList(@PathVariable("userId") int userId){
+        List<MeetingDto> list = meetingService.specificUserMeetingList(userId);
+        if(!list.isEmpty()){
+            return new ResponseEntity<>(Map.of("meetingList", list, "result", "success"), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(Map.of("result","fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

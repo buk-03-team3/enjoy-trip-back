@@ -50,4 +50,10 @@
 								 and m.user_id = #{userId} and m.user_id = u.user_id;
 
 </select>
+
+	<select id="specificUserMeetingList" parameterType="int" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
+		select *
+		  from meeting
+		 where user_id = #{userId}
+	</select>
 </mapper>

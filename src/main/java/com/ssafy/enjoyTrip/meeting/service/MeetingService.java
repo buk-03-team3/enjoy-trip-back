@@ -22,4 +22,5 @@ public interface MeetingService {
 
     public String meetingWritingImageUpload(MultipartFile image) throws IOException;
     public String meetingWritingImageDelete(String imageName) throws IOException;
+    List<MeetingDto> specificUserMeetingList(int userId);
 }
