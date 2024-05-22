@@ -24,11 +24,11 @@
 
     <!-- 해당 글에 참여자가 누구인지 -->
     <select id="joinedParticipants" resultType="com.ssafy.enjoyTrip.meeting.dto.ParticipantDto">
-        select user_id, email, name, user_profile_image_url , code as authority from user where user_id in
-                 (select p.user_id from meeting_participants p
-                        join meeting m on m.meeting_id = p.meeting_id
-                        join user u on u.user_id = m.user_id where p.meeting_id = m.meeting_idheck
-                        and m.meeting_id = #{meetingId})
+        SELECT u.user_id, u.email, u.name, u.user_profile_image_url, c.code_name as authority
+        FROM meeting_participants p
+                 JOIN user u ON u.user_id = p.user_id
+                 JOIN code c ON c.code = p.authority
+        WHERE p.meeting_id = #{meetingId};
     </select>
 
     <!-- 소모임  탈퇴하기 -->
