@@ -21,8 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class CommunityServiceImpl implements CommunityService {
     private final AmazonS3Client amazonS3Client;
 
-    @Value("${cloud.aws.s3.bucket}")
+    @Value("${cloud.aws.s3.community-bucket}")
     private String bucket;
+    private String communityBucket;
 
 
     static CommunityDto sorted[];
@@ -101,20 +102,20 @@ public class CommunityServiceImpl implements CommunityService {
         metadata.setContentType(image.getContentType());
 
         try {
-            amazonS3Client.putObject(bucket, newFilename, image.getInputStream(), metadata);
+            amazonS3Client.putObject(communityBucket, newFilename, image.getInputStream(), metadata);
         } catch (Exception e) {
             throw new IOException("Failed to upload file to S3", e);
         }
         // Return both URL and filename with UUID
-        return amazonS3Client.getUrl(bucket, newFilename).toString();
+        return amazonS3Client.getUrl(communityBucket, newFilename).toString();
     }
 
     @Override
     public int deleteImage(String imageName) {
         try {
-            boolean isObjectExist = amazonS3Client.doesObjectExist(bucket, imageName);
+            boolean isObjectExist = amazonS3Client.doesObjectExist(communityBucket, imageName);
             if (isObjectExist) {
-                amazonS3Client.deleteObject(bucket, imageName);
+                amazonS3Client.deleteObject(communityBucket, imageName);
             }
         } catch (Exception e) {
             e.printStackTrace();

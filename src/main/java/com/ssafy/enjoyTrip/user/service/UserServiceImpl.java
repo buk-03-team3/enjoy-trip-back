@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,16 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserServiceImpl implements UserService{
 	private final AmazonS3Client amazonS3Client;
 
-	@Value("${cloud.aws.s3.bucket}")
+	@Value("${cloud.aws.s3.user-bucket}")
 	private String bucket;
+	private String userBucket;
+
+	@PostConstruct
+	private void init() {
+		userBucket = bucket + "/user";
+		log.info("userBucket: {}", userBucket);
+	}
+
 
 	private final UserDao userDao;
 
@@ -78,6 +87,7 @@ public class UserServiceImpl implements UserService{
 	 * */
 	@Override
 	public String updateUserProfileImage(int userId, String preProfileImageUrl, MultipartFile multipartFile) throws IOException {
+		log.info("userBucket: {}", userBucket);
 		String originalFilename = multipartFile.getOriginalFilename();
 		int dotIndex = originalFilename.lastIndexOf('.');
 
