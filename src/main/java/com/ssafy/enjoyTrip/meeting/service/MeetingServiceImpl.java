@@ -74,13 +74,13 @@ public class MeetingServiceImpl implements MeetingService{
 
     @Override
     public int meetingUpdate(MeetingDto dto) {
-        return 0;
+        return meetingDao.meetingUpdate(dto);
     }
 
     @Override
     @Transactional
     public int meetingDelete(int meetingId) {
-        int resultParticipants =participantDao.deleteAllParticipant(meetingId);
+        int resultParticipants = participantDao.deleteAllParticipant(meetingId);
         int resulMeetingDelete =meetingDao.meetingDelete(meetingId);
         System.out.println(resultParticipants+ " " + resulMeetingDelete);
         if(resulMeetingDelete!=-1 && resultParticipants!=-1){
