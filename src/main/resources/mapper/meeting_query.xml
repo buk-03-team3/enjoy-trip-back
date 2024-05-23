@@ -52,8 +52,12 @@
 </select>
 
 	<select id="specificUserMeetingList" parameterType="int" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
-		select *
-		  from meeting
-		 where user_id = #{userId}
+		select m.meeting_id, m.meeting_password, m.title,
+			   m.meeting_start_date, meeting_end_date, thumbnail_url, reg_date, max_people ,
+			   u.name as userName, u.user_profile_image_url, a.addr1,
+			   a.first_image
+		from meeting m join user u on u.user_id= m.user_id
+					   join attraction_info a on m.attraction_id = a.attraction_id
+		where m.user_id = #{userId};
 	</select>
 </mapper>
