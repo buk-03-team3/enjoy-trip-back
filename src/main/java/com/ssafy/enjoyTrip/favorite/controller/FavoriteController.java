@@ -42,7 +42,7 @@ public class FavoriteController {
 		if (ret > 0) {
 			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
 		}
-		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.OK);
+		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@DeleteMapping("/{favoriteId}")
@@ -52,6 +52,6 @@ public class FavoriteController {
 		if (ret > 0) {
 			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
 		}
-		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.OK);
+		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
