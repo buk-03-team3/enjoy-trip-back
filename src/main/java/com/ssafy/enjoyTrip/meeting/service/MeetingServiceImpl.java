@@ -142,4 +142,23 @@ public class MeetingServiceImpl implements MeetingService{
         return meetingDao.specificUserMeetingList(userId);
     }
 
+    @Override
+    public int deleteMeetingImage(String imageUrl) {
+        int result = -1;
+
+        if(("".equals(imageUrl) || "default".equals(imageUrl) ||imageUrl == null)){
+            return -1;
+        }
+
+        try {
+            boolean isImageExist = amazonS3Client.doesObjectExist(bucket, imageUrl);
+            if(isImageExist) {
+                amazonS3Client.deleteObject(bucket, imageUrl);
+                return 1;
+            }
+        } catch (Exception e) {
+            return -1;
+        }
+        return result;
+    }
 }
