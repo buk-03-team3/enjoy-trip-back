@@ -163,4 +163,14 @@ public class CommunityController {
 		}
 		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+
+	@GetMapping("/delete-image/{imageUrl}")
+	public ResponseEntity<Map<String,String>> deleteMeetingImage(@PathVariable("imageUrl") String imageUrl){
+		int result = communityService.deleteCommunityImage(imageUrl);
+
+		if(result == 1) {
+			return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(Map.of("result", "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

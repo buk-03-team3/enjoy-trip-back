@@ -133,6 +133,24 @@ public class CommunityServiceImpl implements CommunityService {
         return communityDao.specificUserWriteCommunity(userId);
     }
 
+    @Override
+    public int deleteCommunityImage(String imageUrl) {
+        int result = -1;
+
+        if(("".equals(imageUrl) || "default".equals(imageUrl) || imageUrl == null)){
+            return -1;
+        }
+        try {
+            boolean isImageExist = amazonS3Client.doesObjectExist(bucket, imageUrl);
+            if(isImageExist) {
+                amazonS3Client.deleteObject(bucket, imageUrl);
+                return 1;
+            }
+        } catch (Exception e) {
+            return -1;
+        }
+        return result;
+    }
 
     public List<CommunityDto> sort(List<CommunityDto> list) {
         // 사이즈가 1보다 크다면
