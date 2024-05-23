@@ -90,7 +90,7 @@ public class MeetingTest {
 	public void getMeetingList(){
 		int limit =10;
 		int offset =0;
-		List<MeetingDto> dtoList = dao.meetingList(limit,offset,"여행","","2024","");
+		List<MeetingDto> dtoList = dao.meetingList(limit,offset);
 		System.out.println(dtoList);
 		assertEquals(8,dtoList.size());
 	}

@@ -11,11 +11,16 @@ public interface MeetingDao {
 	public int meetingInsert(MeetingDto dto);
 	public MeetingDto meetingDetail(int meetingId);
 	public List<MeetingDto> meetingList(@Param("limit") int limit,
+										@Param("offset") int offset);
+
+	public List<MeetingDto> meetingSearchList(@Param("limit") int limit,
 										@Param("offset") int offset,
 										@Param("searchTitle") String searchTitle,
 										@Param("searchAddr") String searchAddr,
 										@Param("meetingStartDate") String meetingStartDate,
-										@Param("meetingEndDate") String meetingEndDate);
+										@Param("meetingEndDate") String meetingEndDate,
+										@Param("maxPeople") String maxPeople,
+										@Param("meetingPassword") String meetingPassword );
 
 	public int meetingUpdate(MeetingDto dto);
 	public int meetingDelete(int meetingId);

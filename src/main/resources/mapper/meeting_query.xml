@@ -9,7 +9,7 @@
 
 <select id="meetingDetail" parameterType="int" resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
 	select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2, a.latitude, a.longitude, m.max_people,
-	       u.name, u.user_profile_image_url, m.reg_Date
+	       u.name as userName, u.user_profile_image_url, m.reg_Date
 	from meeting m join attraction_info a
 				   join user u
 	where a.attraction_id = m.attraction_id
@@ -22,13 +22,25 @@
 	FROM meeting m
 			 JOIN attraction_info a ON a.attraction_id = m.attraction_id
 			 JOIN user u ON m.user_id = u.user_id
-	WHERE m.title LIKE concat('%', #{searchTitle},'%')
-	  AND a.addr1 LIKE concat('%',#{searchAddr},'%')
-	  AND m.meeting_start_date LIKE concat('%',#{meetingStartDate},'%')
-	  AND m.meeting_end_Date LIKE concat('%',#{meetingEndDate},'%')
 	ORDER BY m.reg_Date DESC
 		LIMIT #{limit} OFFSET #{offset}
 </select>
+
+	<select id="meetingSearchList"  resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
+		select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2,
+			   u.name as userName, u.user_profile_image_url , m.reg_date, m.thumbnail_url , m.max_people
+		FROM meeting m
+				 JOIN attraction_info a ON a.attraction_id = m.attraction_id
+				 JOIN user u ON m.user_id = u.user_id
+		WHERE m.title LIKE concat('%', #{searchTitle},'%')
+		  AND a.addr1 LIKE concat('%',#{searchAddr},'%')
+		  AND m.meeting_start_date LIKE concat('%',#{meetingStartDate},'%')
+		  OR m.meeting_end_Date LIKE concat('%',#{meetingEndDate},'%')
+			AND m.max_people = #{maxPeople}
+			AND m.meeting_password = #{meetingPassword}
+		ORDER BY m.reg_Date DESC
+		LIMIT #{limit} OFFSET #{offset}
+	</select>
 
 <update id="meetingUpdate" parameterType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
 	update meeting set title=#{title}, content=#{content}, meeting_password=#{meetingPassword},

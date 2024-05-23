@@ -37,13 +37,9 @@ public class MeetingController {
 
     @GetMapping("/posts")
     public ResponseEntity<Map<String,Object>> meetingList(@RequestParam("limit") int limit,
-                                                          @RequestParam("offset") int offset,
-                                                          @RequestParam("searchTitle") String searchTitle,
-                                                          @RequestParam("searchAddr") String searchAddr,
-                                                          @RequestParam("meetingStartDate") String meetingStartDate,
-                                                          @RequestParam("meetingEndDate") String meetingEndDate){
+                                                          @RequestParam("offset") int offset){
         Map<String,Object> map = new HashMap<>();
-        List<MeetingDto> list=meetingService.meetingList(limit,offset,searchTitle,searchAddr,meetingStartDate,meetingEndDate);
+        List<MeetingDto> list=meetingService.meetingList(limit,offset);
         if(!list.isEmpty()){
             map.put("list",list);
             map.put("result", "success");
@@ -51,6 +47,28 @@ public class MeetingController {
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
         }else{
             map.put("result","fail");
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+    }
+    @GetMapping("/posts/search")
+    public ResponseEntity<Map<String,Object>> meetingSearchList(@RequestParam("limit") int limit,
+                                                                @RequestParam("offset") int offset,
+                                                                @RequestParam("searchTitle") String searchTitle,
+                                                                @RequestParam("searchAddr") String searchAddr,
+                                                                @RequestParam("meetingStartDate") String meetingStartDate,
+                                                                @RequestParam("meetingEndDate") String meetingEndDate,
+                                                                @RequestParam("maxPeople") String maxPeople,
+                                                                @RequestParam("meetingPassword") String meetingPassword) {
+        Map<String, Object> map = new HashMap<>();
+        List<MeetingDto> list = meetingService.meetingSearchList(limit, offset, searchTitle, searchAddr, meetingStartDate, meetingEndDate, maxPeople, meetingPassword);
+        if (!list.isEmpty()) {
+            map.put("list", list);
+            map.put("result", "success");
+            System.out.println(list);
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+        } else {
+            map.put("result", "fail");
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.INTERNAL_SERVER_ERROR);
 
         }

@@ -65,12 +65,9 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
-    public List<MeetingDto> meetingList(int limit, int offset ,String searchTitle,
-                                        String searchAddr,
-                                        String meetingStartDate,
-                                        String meetingEndDate) {
+    public List<MeetingDto> meetingList(int limit, int offset) {
         List<MeetingDto> list;
-        list = meetingDao.meetingList(limit,offset,searchTitle,searchAddr,meetingStartDate, meetingEndDate);
+        list = meetingDao.meetingList(limit,offset);
         return list;
     }
 
@@ -160,5 +157,13 @@ public class MeetingServiceImpl implements MeetingService{
             return -1;
         }
         return result;
+    }
+
+    @Override
+    public List<MeetingDto> meetingSearchList(int limit, int offset, String searchTitle,
+                                              String searchAddr, String meetingStartDate,
+                                              String meetingEndDate, String maxPeople,
+                                              String meetingPassword) {
+        return meetingDao.meetingSearchList(limit,offset,searchTitle,searchAddr,meetingStartDate,meetingEndDate,maxPeople,meetingPassword);
     }
 }
