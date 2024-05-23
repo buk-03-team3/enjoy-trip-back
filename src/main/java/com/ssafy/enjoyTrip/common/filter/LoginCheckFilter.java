@@ -19,7 +19,7 @@ public class LoginCheckFilter implements Filter {
     }
 
     private static final String[] whiteList = {
-            "/", "/user", "/user/find/*", "/auth/login", "/auth/logout", "/ping",
+            "/", "/user", "/user/find/*", "/auth/login", "/auth/logout", "/ping", "/favorite/*", "/favorite",
 
             "/css/*", "/ico.*",
 
@@ -30,12 +30,15 @@ public class LoginCheckFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String requestURI = httpRequest.getRequestURI();
 
+
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         try {
             if(isLoginCheckPath(requestURI)) {
                 HttpSession session = httpRequest.getSession(false);
+
                 if(session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null){
+                    log.info("로그인 필요");
                     httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                     return; // 여기가 중요, 미인증 사용자는 다음으로 진행하지 않고 끝
                 }

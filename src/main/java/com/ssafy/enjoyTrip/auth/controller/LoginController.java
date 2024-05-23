@@ -55,4 +55,13 @@ public class LoginController {
 		session.invalidate();
 		return new ResponseEntity<>(Map.of("result", "success"), HttpStatus.OK);
 	}
+	@GetMapping("/check")
+	@Operation(summary = "사용자 인증", description = "User 로그인 인증")
+	public ResponseEntity<String> checkAuth(HttpSession session) {
+		if (session != null && session.getAttribute(SessionConst.LOGIN_MEMBER) != null) {
+			return ResponseEntity.ok("Authenticated");
+		} else {
+			return ResponseEntity.status(401).body("Unauthorized");
+		}
+	}
 }
