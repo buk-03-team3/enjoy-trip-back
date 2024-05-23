@@ -162,8 +162,8 @@ public class MeetingServiceImpl implements MeetingService{
 
     @Override
     public List<MeetingDto> meetingSearchList(int limit, int offset, String searchTitle,
-                                              String searchAddr, LocalDateTime meetingStartDate,
-                                              LocalDateTime meetingEndDate, int maxPeople,
+                                              String searchAddr, String meetingStartDate,
+                                              String meetingEndDate, int maxPeople,
                                               String meetingPassword) {
         boolean meetingPw = "true".equals(meetingPassword) == true ? true: false;
         return meetingDao.meetingSearchList(limit,offset,searchTitle,searchAddr,meetingStartDate,meetingEndDate,maxPeople,meetingPw);

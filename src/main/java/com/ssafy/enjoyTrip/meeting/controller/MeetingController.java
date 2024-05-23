@@ -58,8 +58,8 @@ public class MeetingController {
                                                                 @RequestParam("offset") int offset,
                                                                 @RequestParam("searchTitle") String searchTitle,
                                                                 @RequestParam("searchAddr") String searchAddr,
-                                                                @RequestParam(name = "meetingStartDate",defaultValue = "2000-01-01") LocalDateTime meetingStartDate,
-                                                                @RequestParam(name= "meetingEndDate" ,defaultValue="3000-01-01") LocalDateTime meetingEndDate,
+                                                                @RequestParam(name = "meetingStartDate",defaultValue = "2000-01-01") String meetingStartDate,
+                                                                @RequestParam(name= "meetingEndDate" ,defaultValue="3000-01-01") String meetingEndDate,
                                                                 @RequestParam(name = "maxPeople", defaultValue = "0") int maxPeople,
                                                                 @RequestParam("meetingPassword") String meetingPassword) {
         Map<String, Object> map = new HashMap<>();

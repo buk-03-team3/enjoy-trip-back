@@ -26,8 +26,8 @@ public interface MeetingService {
                                               int offset,
                                                String searchTitle,
                                                String searchAddr,
-                                               LocalDateTime meetingStartDate,
-                                               LocalDateTime meetingEndDate,
+                                               String meetingStartDate,
+                                               String meetingEndDate,
                                                int maxPeople,
                                                String meetingPassword );
 }

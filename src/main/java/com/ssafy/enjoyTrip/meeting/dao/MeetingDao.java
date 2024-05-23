@@ -18,8 +18,8 @@ public interface MeetingDao {
 										@Param("offset") int offset,
 										@Param("searchTitle") String searchTitle,
 										@Param("searchAddr") String searchAddr,
-										@Param("meetingStartDate") LocalDateTime meetingStartDate,
-										@Param("meetingEndDate") LocalDateTime meetingEndDate,
+										@Param("meetingStartDate") String meetingStartDate,
+										@Param("meetingEndDate") String meetingEndDate,
 										@Param("maxPeople") int maxPeople,
 										@Param("meetingPassword") boolean meetingPassword );
 
@@ -28,3 +28,4 @@ public interface MeetingDao {
 	public List<MeetingDto> myMeetingList(int userId);
 	List<MeetingDto> specificUserMeetingList(int userId);
 }
+
