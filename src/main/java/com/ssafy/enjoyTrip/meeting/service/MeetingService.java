@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MeetingService {
@@ -25,8 +26,8 @@ public interface MeetingService {
                                               int offset,
                                                String searchTitle,
                                                String searchAddr,
-                                               String meetingStartDate,
-                                               String meetingEndDate,
-                                               String maxPeople,
+                                               LocalDateTime meetingStartDate,
+                                               LocalDateTime meetingEndDate,
+                                               int maxPeople,
                                                String meetingPassword );
 }

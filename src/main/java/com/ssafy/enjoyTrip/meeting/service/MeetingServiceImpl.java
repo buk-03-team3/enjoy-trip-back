@@ -8,6 +8,7 @@ import com.ssafy.enjoyTrip.meeting.dto.MeetingDetailDto;
 import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -161,9 +162,10 @@ public class MeetingServiceImpl implements MeetingService{
 
     @Override
     public List<MeetingDto> meetingSearchList(int limit, int offset, String searchTitle,
-                                              String searchAddr, String meetingStartDate,
-                                              String meetingEndDate, String maxPeople,
+                                              String searchAddr, LocalDateTime meetingStartDate,
+                                              LocalDateTime meetingEndDate, int maxPeople,
                                               String meetingPassword) {
-        return meetingDao.meetingSearchList(limit,offset,searchTitle,searchAddr,meetingStartDate,meetingEndDate,maxPeople,meetingPassword);
+        boolean meetingPw = "true".equals(meetingPassword) == true ? true: false;
+        return meetingDao.meetingSearchList(limit,offset,searchTitle,searchAddr,meetingStartDate,meetingEndDate,maxPeople,meetingPw);
     }
 }

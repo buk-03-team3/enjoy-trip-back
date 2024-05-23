@@ -27,18 +27,29 @@
 </select>
 
 	<select id="meetingSearchList"  resultType="com.ssafy.enjoyTrip.meeting.dto.MeetingDto">
-		select m.*, a.attraction_id , a.addr1, a.first_image, a.first_image2,
-			   u.name as userName, u.user_profile_image_url , m.reg_date, m.thumbnail_url , m.max_people
+		SELECT m.*,
+		a.attraction_id, a.addr1, a.first_image, a.first_image2,
+		u.name as userName, u.user_profile_image_url,
+		m.reg_date, m.thumbnail_url, m.max_people
 		FROM meeting m
-				 JOIN attraction_info a ON a.attraction_id = m.attraction_id
-				 JOIN user u ON m.user_id = u.user_id
-		WHERE m.title LIKE concat('%', #{searchTitle},'%')
-		  AND a.addr1 LIKE concat('%',#{searchAddr},'%')
-		  AND m.meeting_start_date LIKE concat('%',#{meetingStartDate},'%')
-		  OR m.meeting_end_Date LIKE concat('%',#{meetingEndDate},'%')
-			AND m.max_people = #{maxPeople}
-			AND m.meeting_password = #{meetingPassword}
-		ORDER BY m.reg_Date DESC
+		JOIN attraction_info a ON a.attraction_id = m.attraction_id
+		JOIN user u ON m.user_id = u.user_id
+		WHERE m.title LIKE CONCAT('%', #{searchTitle}, '%')
+		AND a.addr1 LIKE CONCAT('%', #{searchAddr}, '%')
+		AND   m.meeting_start_date>=#{meetingStartDate}
+		AND  #{meetingEndDate}>= meeting_end_date
+		<choose>
+		  	<when test = "maxPeople !=0">
+				AND m.max_people = #{maxPeople}
+			</when>
+			<when test="meetingPassword == true">
+				AND m.meeting_password IS NOT NULL
+			</when>
+			<otherwise>
+				AND m.meeting_password IS NULL
+			</otherwise>
+		</choose>
+		ORDER BY m.reg_date DESC
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 

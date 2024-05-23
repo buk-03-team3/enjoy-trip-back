@@ -6,6 +6,8 @@ import com.ssafy.enjoyTrip.meeting.dto.MeetingDto;
 import com.ssafy.enjoyTrip.meeting.service.MeetingService;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,11 +58,13 @@ public class MeetingController {
                                                                 @RequestParam("offset") int offset,
                                                                 @RequestParam("searchTitle") String searchTitle,
                                                                 @RequestParam("searchAddr") String searchAddr,
-                                                                @RequestParam("meetingStartDate") String meetingStartDate,
-                                                                @RequestParam("meetingEndDate") String meetingEndDate,
-                                                                @RequestParam("maxPeople") String maxPeople,
+                                                                @RequestParam(name = "meetingStartDate",defaultValue = "2000-01-01") LocalDateTime meetingStartDate,
+                                                                @RequestParam(name= "meetingEndDate" ,defaultValue="3000-01-01") LocalDateTime meetingEndDate,
+                                                                @RequestParam(name = "maxPeople", defaultValue = "0") int maxPeople,
                                                                 @RequestParam("meetingPassword") String meetingPassword) {
         Map<String, Object> map = new HashMap<>();
+        System.out.printf("%d %d %s %s %s %s %s %s",limit,offset,searchTitle,searchAddr,meetingStartDate,meetingEndDate,maxPeople, meetingPassword);
+        System.out.println(meetingEndDate+" meetingEndTime");
         List<MeetingDto> list = meetingService.meetingSearchList(limit, offset, searchTitle, searchAddr, meetingStartDate, meetingEndDate, maxPeople, meetingPassword);
         if (!list.isEmpty()) {
             map.put("list", list);

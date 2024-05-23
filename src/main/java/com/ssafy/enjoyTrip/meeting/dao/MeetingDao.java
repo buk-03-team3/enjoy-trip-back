@@ -1,5 +1,6 @@
 package com.ssafy.enjoyTrip.meeting.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,10 +18,10 @@ public interface MeetingDao {
 										@Param("offset") int offset,
 										@Param("searchTitle") String searchTitle,
 										@Param("searchAddr") String searchAddr,
-										@Param("meetingStartDate") String meetingStartDate,
-										@Param("meetingEndDate") String meetingEndDate,
-										@Param("maxPeople") String maxPeople,
-										@Param("meetingPassword") String meetingPassword );
+										@Param("meetingStartDate") LocalDateTime meetingStartDate,
+										@Param("meetingEndDate") LocalDateTime meetingEndDate,
+										@Param("maxPeople") int maxPeople,
+										@Param("meetingPassword") boolean meetingPassword );
 
 	public int meetingUpdate(MeetingDto dto);
 	public int meetingDelete(int meetingId);
